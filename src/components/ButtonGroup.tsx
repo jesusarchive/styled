@@ -1,10 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
-
-import { sizesAllPropTypes, variantPropTypes } from './utils/system';
-
-import Box, { basePropTypes } from './Box';
+import Box from './Box';
 
 export const StyledButtonGroup = styled(Box)`
     display: inline-flex;
@@ -30,26 +26,21 @@ export const StyledButtonGroup = styled(Box)`
     }
 `;
 
-const ButtonGroup = ({ children, size, variant, ...props }) => {
+type ButtonGroupProps = {
+    size?: any;
+    variant?: any;
+};
+
+const ButtonGroup: React.FC<any> = ({ children, size, variant, ...props }: any) => {
     const buttonProps = {
         size,
         variant
     };
-
     return (
         <StyledButtonGroup {...props}>
             {React.Children.map(children, (child) => React.cloneElement(child, { ...buttonProps }))}
         </StyledButtonGroup>
     );
-};
-
-ButtonGroup.displayName = 'ButtonGroup';
-
-ButtonGroup.propTypes = {
-    children: PropTypes.node.isRequired,
-    size: sizesAllPropTypes,
-    variant: variantPropTypes,
-    ...basePropTypes
 };
 
 export default ButtonGroup;

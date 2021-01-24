@@ -1,17 +1,12 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-
+import Box from './Box';
 import { getColor, getTheme, px } from './utils/helpers';
-import { sizesAllPropTypes, variantPropTypes } from './utils/system';
 
-import Box, { basePropTypes } from './Box';
-
-const styles = (props) => {
+const styles = (props: any) => {
     const { size } = props;
     const sizes = getTheme(props, 'switchSizes');
-
     return css`
         cursor: pointer;
         height: ${px(sizes[size].height)};
@@ -22,11 +17,10 @@ const styles = (props) => {
     `;
 };
 
-const stylesTrack = (props) => {
+const stylesTrack = (props: any) => {
     const { size, status } = props;
     const sizes = getTheme(props, 'switchSizes');
     const color = getColor(props);
-
     return css`
         background-color: ${status ? color : '#ccc'};
         border-radius: ${px(sizes[size].borderRadius)};
@@ -38,10 +32,9 @@ const stylesTrack = (props) => {
     `;
 };
 
-const stylesButton = (props) => {
+const stylesButton = (props: any) => {
     const { size, status } = props;
     const sizes = getTheme(props, 'switchSizes');
-
     return css`
         background-color: #fff;
         border-radius: 50%;
@@ -63,11 +56,11 @@ const StyledInput = styled.input`
     top: 0;
 `;
 
-const StyledTrack = styled.span`
+const StyledTrack: React.FC<any> = styled.span`
     ${stylesTrack};
 `;
 
-const StyledButton = styled.span`
+const StyledButton: React.FC<any> = styled.span`
     ${stylesButton};
 `;
 
@@ -75,59 +68,52 @@ export const StyledSwitch = styled(Box)`
     ${styles};
 `;
 
-class Switch extends React.PureComponent {
-    constructor(props) {
-        super(props);
+interface ISwitchProps extends React.HTMLAttributes<Element> {
+    name: string;
+    onChange?: (...args: any[]) => any;
+    size?: any;
+    value?: boolean;
+    variant?: any;
+    rest?: any;
+}
 
+type SwitchState = {
+    status?: any;
+};
+
+class Switch extends React.PureComponent<ISwitchProps, SwitchState> {
+    constructor(props: any) {
+        super(props);
         this.state = {
             status: props.value
         };
     }
-
-    static propTypes = {
-        name: PropTypes.string.isRequired,
-        onChange: PropTypes.func,
-        /** sizesAllPropTypes */
-        size: sizesAllPropTypes,
-        value: PropTypes.bool,
-        variant: variantPropTypes,
-        ...basePropTypes
-    };
-
     static defaultProps = {
         onChange: () => {},
         size: 'md',
         value: false,
         variant: 'primary'
     };
-
-    componentDidUpdate(prevProps) {
+    componentDidUpdate(prevProps: any) {
         const { value } = this.props;
-
         if (prevProps.value !== value) {
             this.update(value);
         }
     }
-
-    update = (value) => {
+    update = (value: any) => {
         this.setState({ status: value });
     };
-
     handleClick = () => {
         const { status } = this.state;
-        const { onChange } = this.props;
-
+        const { onChange } = this.props as any;
         this.setState({
             status: !status
         });
-
         onChange(!status);
     };
-
     render() {
         const { name, ...rest } = this.props;
         const { status } = this.state;
-
         return (
             <StyledSwitch status={status} {...rest} onClick={this.handleClick}>
                 <StyledInput type="hidden" name={name} value={status} />

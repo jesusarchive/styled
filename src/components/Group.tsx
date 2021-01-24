@@ -1,11 +1,8 @@
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
-
+import Box from './Box';
 import { spacer } from './utils/helpers';
 
-import Box, { basePropTypes } from './Box';
-
-const Group = styled(Box)`
+const Group: React.FC<any> = styled(Box)`
     align-items: center;
     display: flex;
     flex-wrap: wrap;
@@ -14,12 +11,5 @@ const Group = styled(Box)`
         margin-left: ${spacer(2)};
     }
 `;
-
-Group.displayName = 'Group';
-
-Group.propTypes = {
-    children: PropTypes.node.isRequired,
-    ...basePropTypes
-};
 
 export default Group;

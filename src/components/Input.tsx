@@ -1,12 +1,9 @@
-import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-
+import Box from './Box';
 import { getTheme, isDefined, px } from './utils/helpers';
-import { formPseudo, inputTextTypes, outlines } from './utils/system';
+import { formPseudo, inputTextTypes } from './utils/system';
 
-import Box, { basePropTypes } from './Box';
-
-const styles = (props) => {
+const styles = (props: any) => {
     const {
         bg,
         bordered,
@@ -37,15 +34,12 @@ const styles = (props) => {
         padding,
         validation
     } = getTheme(props, 'input');
-
     let currentBorderColor = bc || borderColor;
-
     if (valid) {
         currentBorderColor = validation.valid;
     } else if (valid === false) {
         currentBorderColor = validation.invalid;
     }
-
     return css`
         background-color: ${bg || backgroundColor};
         border: ${bordered ? `${px(bw || borderWidth)} solid ${currentBorderColor}` : 0};
@@ -67,59 +61,57 @@ const styles = (props) => {
     `;
 };
 
-const Input = styled(Box).attrs(({ id, name }) => ({
-    id: id || name
-}))`
+type InputProps = {
+    accept?: string;
+    as?: string;
+    autoComplete?: string;
+    bordered?: boolean;
+    checked?: boolean;
+    defaultChecked?: boolean;
+    defaultValue?: number | string;
+    disabled?: boolean;
+    id?: string;
+    maxLength?: number;
+    minLength?: number;
+    name?: string;
+    pattern?: string;
+    placeholder?: string;
+    readOnly?: boolean;
+    required?: boolean;
+    size?: 'sm' | 'md' | 'lg';
+    tabindex?: number;
+    type?:
+        | 'checkbox'
+        | 'color'
+        | 'date'
+        | 'email'
+        | 'file'
+        | 'hidden'
+        | 'number'
+        | 'password'
+        | 'radio'
+        | 'search'
+        | 'tel'
+        | 'text';
+    valid?: boolean;
+    value?: string | number;
+};
+
+const Input: React.FC<any> = styled(Box).attrs(
+    (
+        { id, name } = {
+            as: 'input',
+            bordered: true,
+            size: 'md',
+            type: 'text',
+            value: undefined
+        }
+    ) => ({
+        id: id || name
+    })
+)`
     ${styles};
     ${formPseudo};
 `;
-
-Input.propTypes = {
-    accept: PropTypes.string,
-    as: PropTypes.string,
-    autoComplete: PropTypes.string,
-    bordered: PropTypes.bool,
-    checked: PropTypes.bool,
-    defaultChecked: PropTypes.bool,
-    defaultValue: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-    disabled: PropTypes.bool,
-    id: PropTypes.string,
-    maxLength: PropTypes.number,
-    minLength: PropTypes.number,
-    name: PropTypes.string,
-    pattern: PropTypes.string,
-    placeholder: PropTypes.string,
-    readOnly: PropTypes.bool,
-    required: PropTypes.bool,
-    size: PropTypes.oneOf(['sm', 'md', 'lg']),
-    tabindex: PropTypes.number,
-    /** inputTypes */
-    type: PropTypes.oneOf([
-        'checkbox',
-        'color',
-        'date',
-        'email',
-        'file',
-        'hidden',
-        'number',
-        'password',
-        'radio',
-        'search',
-        'tel',
-        'text'
-    ]),
-    valid: PropTypes.bool,
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    ...basePropTypes,
-    ...outlines.propTypes
-};
-
-Input.defaultProps = {
-    as: 'input',
-    bordered: true,
-    size: 'md',
-    type: 'text',
-    value: undefined
-};
 
 export default Input;

@@ -1,15 +1,10 @@
-import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-
+import Box from './Box';
 import { getTheme, px } from './utils/helpers';
-import { sizesPropTypes } from './utils/system';
 
-import Box, { basePropTypes } from './Box';
-
-const styles = (props) => {
+const styles = (props: any) => {
     const { bordered, borderless, inverted } = props;
     const { borderColors, colors } = getTheme(props, 'table');
-
     return css`
         background-color: ${colors[inverted ? 'secondary' : 'primary']};
         ${bordered && !borderless
@@ -20,9 +15,9 @@ const styles = (props) => {
         width: 100%;
     `;
 };
-const stylesCaption = (props) => {
-    const { captionColor, captionPadding } = getTheme(props, 'table');
 
+const stylesCaption = (props: any) => {
+    const { captionColor, captionPadding } = getTheme(props, 'table');
     return css`
         caption-side: bottom;
         color: ${captionColor};
@@ -32,75 +27,81 @@ const stylesCaption = (props) => {
         text-align: left;
     `;
 };
-const stylesCellBorder = (props) => {
+
+const stylesCellBorder = (props: any) => {
     const { bordered, borderless, inverted } = props;
     const { borderColors } = getTheme(props, 'table');
-
     if (borderless) {
         return '';
     }
-
     return css`
         ${bordered ? 'border' : 'border-top'}: 1px solid
       ${borderColors[inverted ? 'secondary' : 'primary']};
     `;
 };
-const stylesHeadBackgroundColor = (props) => {
+
+const stylesHeadBackgroundColor = (props: any) => {
     const { head } = props;
     const { headColors } = getTheme(props, 'table');
-
     return css`
         background-color: ${headColors[head] || 'transparent'};
     `;
 };
-const stylesHeadCellBorder = (props) => {
+
+const stylesHeadCellBorder = (props: any) => {
     const { bordered, borderless, inverted } = props;
     const { borderColors } = getTheme(props, 'table');
     const colorProp = borderColors[inverted ? 'secondary' : 'primary'];
-
     if (borderless) {
         return '';
     }
-
     return css`
         ${bordered ? `border: 1px solid ${colorProp}` : `border-bottom: 2px solid ${colorProp}`};
         ${bordered && 'border-bottom-width: 2px'};
     `;
 };
-const stylesHeadColor = (props) => {
+
+const stylesHeadColor = (props: any) => {
     const { head } = props;
     const { colors } = getTheme(props, 'table');
-
     if (head) {
         return css`
             color: ${colors[head === 'dark' ? 'primary' : 'secondary']};
         `;
     }
-
     return '';
 };
-const stylesPadding = (props) => {
+
+const stylesPadding = (props: any) => {
     const { size } = props;
     const { padding } = getTheme(props, 'table');
-
     return css`
         padding: ${px(padding[size])};
     `;
 };
-const stylesStriped = (props) => {
+
+const stylesStriped = (props: any) => {
     const { inverted, striped } = props;
     const { stripedColors } = getTheme(props, 'table');
-
     if (striped) {
         return css`
             background-color: ${stripedColors[inverted ? 'secondary' : 'primary']};
         `;
     }
-
     return '';
 };
 
-const Table = styled(Box)`
+type TableProps = {
+    as?: string;
+    bordered?: boolean;
+    borderless?: boolean;
+    head?: 'light' | 'dark';
+    inverted?: boolean;
+    size?: any;
+    striped?: boolean;
+};
+
+const Table: React.FC<any> = styled(Box)`
     ${styles};
 
     th {
@@ -132,20 +133,6 @@ const Table = styled(Box)`
         ${stylesCaption};
     }
 `;
-
-Table.displayName = 'Table';
-
-Table.propTypes = {
-    as: PropTypes.string,
-    bordered: PropTypes.bool,
-    borderless: PropTypes.bool,
-    children: PropTypes.node.isRequired,
-    head: PropTypes.oneOf(['light', 'dark']),
-    inverted: PropTypes.bool,
-    size: sizesPropTypes,
-    striped: PropTypes.bool,
-    ...basePropTypes
-};
 
 Table.defaultProps = {
     as: 'table',

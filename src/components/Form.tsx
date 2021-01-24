@@ -1,14 +1,10 @@
-import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-
+import Box from './Box';
 import { getTheme, px } from './utils/helpers';
 
-import Box, { basePropTypes } from './Box';
-
-const styles = (props) => {
+const styles = (props: any) => {
     const { bordered, textAlign } = props;
     const { borderColor, borderRadius, padding } = getTheme(props, 'form');
-
     return css`
         ${bordered ? `border: 1px solid ${borderColor};` : ''}
         ${bordered ? `border-radius: ${px(borderRadius)};` : ''}
@@ -17,22 +13,18 @@ const styles = (props) => {
     `;
 };
 
-const Form = styled(Box)`
+type FormProps = {
+    action?: string;
+    as?: string;
+    bordered?: boolean;
+    enctype?: string;
+    method?: 'get' | 'post';
+    target?: string;
+};
+
+const Form: React.FC<any> = styled(Box)`
     ${styles};
 `;
-
-Form.displayName = 'Form';
-
-Form.propTypes = {
-    action: PropTypes.string,
-    as: PropTypes.string,
-    bordered: PropTypes.bool,
-    children: PropTypes.node.isRequired,
-    enctype: PropTypes.string,
-    method: PropTypes.oneOf(['get', 'post']),
-    target: PropTypes.string,
-    ...basePropTypes
-};
 
 Form.defaultProps = {
     as: 'form',

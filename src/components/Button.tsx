@@ -1,14 +1,12 @@
-import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import Badge from './Badge';
-import Box, { basePropTypes } from './Box';
+import Box from './Box';
 import { getColor, getStyles, getTheme, isDefined, px } from './utils/helpers';
-import { baseStyles, outlines, sizesAllPropTypes, variantPropTypes } from './utils/system';
+import { baseStyles, outlines } from './utils/system';
 
-const styles = (props) => {
+const styles = (props: any) => {
     const { animate, borderRadius: br, lineHeight: lh, bordered, size } = props;
     const { borderRadius, lineHeight, loader, padding } = getTheme(props, 'button');
-
     return css`
         ${baseStyles.variant};
         align-items: center;
@@ -22,12 +20,25 @@ const styles = (props) => {
         line-height: ${lh || lineHeight};
         padding: ${px(padding[size][0])} ${px(padding[size][1])};
         text-decoration: none;
-        width: ${({ block }) => (block ? '100%' : 'auto')};
+        width: ${({ block }: any) => (block ? '100%' : 'auto')};
         ${animate ? loader(bordered ? '#ccc' : '#fff') : ''};
     `;
 };
 
-const Button = styled(Box)`
+type ButtonProps = {
+    animate?: boolean;
+    as?: string;
+    block?: boolean;
+    bordered?: boolean;
+    dark?: boolean;
+    disabled?: boolean;
+    onClick?: (...args: any[]) => any;
+    size?: any;
+    type?: 'button' | 'submit' | 'reset';
+    variant?: any;
+};
+
+const Button: React.FC<any> = styled(Box)`
     ${styles};
 
     &:disabled {
@@ -40,28 +51,10 @@ const Button = styled(Box)`
         ${outlines}
     }
 
-    ${Badge} {
+    ${Badge as any} {
         margin-left: 5px;
     }
 `;
-
-Button.propTypes = {
-    animate: PropTypes.bool,
-    as: PropTypes.string,
-    block: PropTypes.bool,
-    bordered: PropTypes.bool,
-    children: PropTypes.node.isRequired,
-    dark: PropTypes.bool,
-    disabled: PropTypes.bool,
-    onClick: PropTypes.func,
-    /** sizesAllPropTypes */
-    size: sizesAllPropTypes,
-    /** buttonTypes */
-    type: PropTypes.oneOf(['button', 'submit', 'reset']),
-    variant: variantPropTypes,
-    ...basePropTypes,
-    ...outlines.propTypes
-};
 
 Button.defaultProps = {
     animate: false,

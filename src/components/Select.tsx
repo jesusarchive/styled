@@ -1,12 +1,9 @@
-import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-
+import Box from './Box';
 import { getDimmerColor, getTheme, isDefined, lighten, px } from './utils/helpers';
-import { formPseudo, outlines, sizesPropTypes } from './utils/system';
+import { formPseudo } from './utils/system';
 
-import Box, { basePropTypes } from './Box';
-
-const select = (props) => {
+const select = (props: any) => {
     const {
         bg,
         bordered,
@@ -36,18 +33,14 @@ const select = (props) => {
         padding,
         validation
     } = getTheme(props, 'select');
-
     const currentBgColor = bg || backgroundColor;
     let currentBorderColor = bc || borderColor;
-
     if (valid) {
         currentBorderColor = validation.valid;
     } else if (valid === false) {
         currentBorderColor = validation.invalid;
     }
-
     const multipleCheckedColor = bordered ? currentBorderColor : currentBgColor;
-
     return css`
         background-color: ${currentBgColor};
         border: ${bordered ? `${px(bw || borderWidth)} solid ${currentBorderColor}` : 0};
@@ -81,26 +74,21 @@ const select = (props) => {
     `;
 };
 
-const Select = styled(Box)`
+type SelectProps = {
+    as?: string;
+    bordered?: boolean;
+    disabled?: boolean;
+    multiple?: boolean;
+    required?: boolean;
+    size?: number;
+    sizing?: any;
+    valid?: boolean;
+};
+
+const Select: React.FC<any> = styled(Box)`
     ${select};
     ${formPseudo};
 `;
-
-Select.displayName = 'Select';
-
-Select.propTypes = {
-    as: PropTypes.string,
-    bordered: PropTypes.bool,
-    children: PropTypes.node.isRequired,
-    disabled: PropTypes.bool,
-    multiple: PropTypes.bool,
-    required: PropTypes.bool,
-    size: PropTypes.number,
-    sizing: sizesPropTypes,
-    valid: PropTypes.bool,
-    ...basePropTypes,
-    ...outlines.propTypes
-};
 
 Select.defaultProps = {
     as: 'select',

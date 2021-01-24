@@ -1,18 +1,13 @@
-import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-
+import Box from './Box';
 import { getTheme, isDefined, px, responsive, spacer } from './utils/helpers';
 
-import Box, { basePropTypes } from './Box';
-
-const styles = (props) => {
+const styles = (props: any) => {
     const { ml, mr, pb, pl, pr, pt } = props;
     const container = getTheme(props, 'container');
-
-    const vertical = ({ verticalPadding }) => {
+    const vertical = ({ verticalPadding }: any) => {
         /* istanbul ignore else */
         if (!verticalPadding) return '';
-
         const grid = responsive({
             md: `
           padding-bottom: ${isDefined(pb) ? px(pb) : spacer(4)(props)};
@@ -23,7 +18,6 @@ const styles = (props) => {
           padding-top: ${isDefined(pt) ? px(pt) : spacer(5)(props)};
         `
         });
-
         return css`
             padding-bottom: ${isDefined(pb) ? px(pb) : spacer(3)};
             padding-top: ${isDefined(pt) ? px(pt) : spacer(3)};
@@ -31,14 +25,12 @@ const styles = (props) => {
             ${grid};
         `;
     };
-
     const grid = responsive({
         md: `
         padding-left: ${isDefined(pl) ? px(pl) : spacer(4)(props)};
         padding-right: ${isDefined(pr) ? px(pr) : spacer(4)(props)};
       `
     });
-
     return css`
         margin-left: ${isDefined(ml) ? px(ml) : 'auto'};
         margin-right: ${isDefined(mr) ? px(mr) : 'auto'};
@@ -53,24 +45,15 @@ const styles = (props) => {
         ${grid};
     `;
 };
-
-const Container = styled(Box)`
+type ContainerProps = {
+    layout?: 'flex' | 'fullScreen';
+    verticalPadding?: boolean;
+};
+const Container: React.FC<any> = styled(Box)`
     ${styles};
 `;
-
-Container.displayName = 'Container';
-
-Container.propTypes = {
-    children: PropTypes.node.isRequired,
-    /** use the whole Screen */
-    layout: PropTypes.oneOf(['flex', 'fullScreen']),
-    /** add padding top/bottom */
-    verticalPadding: PropTypes.bool,
-    ...basePropTypes
-};
 
 Container.defaultProps = {
     verticalPadding: false
 };
-
 export default Container;

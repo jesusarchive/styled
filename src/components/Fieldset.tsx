@@ -1,15 +1,11 @@
-import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-
+import Box from './Box';
+import Legend from './Legend';
 import { getTheme, isDefined, px, spacer } from './utils/helpers';
 
-import Box, { basePropTypes } from './Box';
-import Legend from './Legend';
-
-const styles = (props) => {
+const styles = (props: any) => {
     const { borderRadius: br, inline, mb, ml, padding: pd } = props;
     const { borderColor, borderRadius, padding, marginBottom } = getTheme(props, 'fieldset');
-
     return css`
         border: 1px solid ${borderColor};
         border-radius: ${px(isDefined(br) ? px(br) : borderRadius)};
@@ -27,26 +23,21 @@ const styles = (props) => {
     `;
 };
 
-const Fieldset = styled(Box)`
+type FieldsetProps = {
+    as?: string;
+    inline?: boolean;
+};
+
+const Fieldset: React.FC<any> = styled(Box)`
     ${styles};
 
-    ${Legend} {
+    ${Legend as any} {
         margin: 0;
     }
 `;
-
-Fieldset.displayName = 'Fieldset';
-
-Fieldset.propTypes = {
-    as: PropTypes.string,
-    children: PropTypes.node.isRequired,
-    inline: PropTypes.bool,
-    ...basePropTypes
-};
 
 Fieldset.defaultProps = {
     as: 'fieldset',
     inline: false
 };
-
 export default Fieldset;

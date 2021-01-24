@@ -1,15 +1,11 @@
-import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-
+import Box from './Box';
 import { getTheme, isDefined, px } from './utils/helpers';
 import { baseStyles } from './utils/system';
 
-import Box, { basePropTypes } from './Box';
-
-const styles = (props) => {
+const styles = (props: any) => {
     const { color: cl, fontFamily, fontWeight: fw, lineHeight, mb } = props;
     const { color, fontWeight, marginBottom } = getTheme(props, 'legend');
-
     return css`
         color: ${cl || color};
         display: block;
@@ -21,17 +17,13 @@ const styles = (props) => {
     `;
 };
 
-const Legend = styled(Box)`
+type LegendProps = {
+    as?: string;
+};
+
+const Legend: React.FC<any> = styled(Box)`
     ${styles};
 `;
-
-Legend.displayName = 'Legend';
-
-Legend.propTypes = {
-    as: PropTypes.string,
-    children: PropTypes.node.isRequired,
-    ...basePropTypes
-};
 
 Legend.defaultProps = {
     as: 'legend'

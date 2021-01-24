@@ -1,12 +1,9 @@
-import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-
+import Box from './Box';
 import { getTheme, isDefined, px } from './utils/helpers';
-import { formPseudo, outlines, sizesPropTypes } from './utils/system';
+import { formPseudo } from './utils/system';
 
-import Box, { basePropTypes } from './Box';
-
-const styles = (props) => {
+const styles = (props: any) => {
     const {
         bg,
         bordered,
@@ -33,14 +30,12 @@ const styles = (props) => {
         padding,
         validation
     } = getTheme(props, 'textarea');
-
     let currentBorderColor = bc || borderColor;
     if (valid) {
         currentBorderColor = validation.valid;
     } else if (valid === false) {
         currentBorderColor = validation.invalid;
     }
-
     return css`
         background-color: ${bg || backgroundColor};
         border: ${bordered ? `${px(bw || borderWidth)} solid ${currentBorderColor}` : 0};
@@ -56,40 +51,41 @@ const styles = (props) => {
     `;
 };
 
-const Textarea = styled(Box).attrs(({ id, name }) => ({
-    id: id || name
-}))`
+type TextareaProps = {
+    as?: string;
+    bordered?: boolean;
+    defaultValue?: number | string;
+    disabled?: boolean;
+    id?: string;
+    maxlength?: number;
+    minlength?: number;
+    name?: string;
+    placeholder?: string;
+    readOnly?: boolean;
+    required?: boolean;
+    rows?: number;
+    size?: any;
+    tabindex?: number;
+    valid?: boolean;
+    value?: string;
+    wrap?: 'soft' | 'hard';
+};
+
+const Textarea: React.FC<any> = styled(Box).attrs(
+    (
+        { id, name, ...props } = {
+            as: 'textarea',
+            bordered: true,
+            rows: 3,
+            size: 'md'
+        }
+    ) => ({
+        id: id || name,
+        ...props
+    })
+)`
     ${styles};
     ${formPseudo};
 `;
-
-Textarea.propTypes = {
-    as: PropTypes.string,
-    bordered: PropTypes.bool,
-    defaultValue: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-    disabled: PropTypes.bool,
-    id: PropTypes.string,
-    maxlength: PropTypes.number,
-    minlength: PropTypes.number,
-    name: PropTypes.string,
-    placeholder: PropTypes.string,
-    readOnly: PropTypes.bool,
-    required: PropTypes.bool,
-    rows: PropTypes.number,
-    size: sizesPropTypes,
-    tabindex: PropTypes.number,
-    valid: PropTypes.bool,
-    value: PropTypes.string,
-    wrap: PropTypes.oneOf(['soft', 'hard']),
-    ...basePropTypes,
-    ...outlines.propTypes
-};
-
-Textarea.defaultProps = {
-    as: 'textarea',
-    bordered: true,
-    rows: 3,
-    size: 'md'
-};
 
 export default Textarea;
