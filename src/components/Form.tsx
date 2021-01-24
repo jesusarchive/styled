@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import styled, { css } from 'styled-components';
 import Box from './Box';
 import { getTheme, px } from './utils/helpers';
+import { BaseProps } from './utils/system';
 
 const styles = (props: any) => {
     const { bordered, textAlign } = props;
@@ -13,16 +15,17 @@ const styles = (props: any) => {
     `;
 };
 
-type FormProps = {
+interface FormProps extends BaseProps {
+    children?: React.ReactNode;
     action?: string;
     as?: string;
     bordered?: boolean;
     enctype?: string;
     method?: 'get' | 'post';
     target?: string;
-};
+}
 
-const Form: React.FC<any> = styled(Box)`
+const Form: React.FC<FormProps> = styled(Box)`
     ${styles};
 `;
 

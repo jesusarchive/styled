@@ -1,8 +1,15 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import styled, { css } from 'styled-components';
-import Badge from './Badge';
 import Box from './Box';
 import { getColor, getStyles, getTheme, isDefined, px } from './utils/helpers';
-import { baseStyles, outlines } from './utils/system';
+import {
+    BaseProps,
+    baseStyles,
+    outlines,
+    OutlinesProps,
+    SizesAllTypes,
+    VariantTypes
+} from './utils/system';
 
 const styles = (props: any) => {
     const { animate, borderRadius: br, lineHeight: lh, bordered, size } = props;
@@ -25,7 +32,12 @@ const styles = (props: any) => {
     `;
 };
 
-type ButtonProps = {
+const buttonTypes = ['button', 'submit', 'reset'];
+
+type ButtonTypes = typeof buttonTypes[number];
+
+interface ButtonProps extends BaseProps, OutlinesProps {
+    children?: React.ReactNode;
     animate?: boolean;
     as?: string;
     block?: boolean;
@@ -33,12 +45,12 @@ type ButtonProps = {
     dark?: boolean;
     disabled?: boolean;
     onClick?: (...args: any[]) => any;
-    size?: any;
-    type?: 'button' | 'submit' | 'reset';
-    variant?: any;
-};
+    size?: SizesAllTypes;
+    type?: ButtonTypes;
+    variant?: VariantTypes;
+}
 
-const Button: React.FC<any> = styled(Box)`
+const Button: React.FC<ButtonProps> = styled(Box)`
     ${styles};
 
     &:disabled {
@@ -49,10 +61,6 @@ const Button: React.FC<any> = styled(Box)`
     &:focus {
         outline-color: ${getColor};
         ${outlines}
-    }
-
-    ${Badge as any} {
-        margin-left: 5px;
     }
 `;
 

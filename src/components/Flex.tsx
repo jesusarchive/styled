@@ -1,16 +1,19 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import styled from 'styled-components';
 import Box from './Box';
+import { BaseProps } from './utils/system';
 
-type FlexProps = {
+interface FlexProps extends BaseProps {
+    children?: React.ReactNode;
     as?: string;
-};
+}
 
-const Flex: React.FC<any> = styled(Box)({
+const Flex: React.FC<FlexProps> = styled(Box)({
     display: 'flex'
 });
 
 Flex.defaultProps = {
-    alignItems: 'center'
+    alignItems: 'center' as any
 };
 
 export default Flex;

@@ -3,9 +3,44 @@
 import darken from 'polished/lib/color/darken';
 import desaturate from 'polished/lib/color/desaturate';
 import lighten from 'polished/lib/color/lighten';
-import PropTypes from 'prop-types';
 import { css, FlattenSimpleInterpolation } from 'styled-components';
-import { compose, style } from 'styled-system';
+import {
+    AlignContentProps,
+    AlignItemsProps,
+    AlignSelfProps,
+    BackgroundImageProps,
+    BorderRadiusProps,
+    BordersProps,
+    BottomProps,
+    ColorProps,
+    compose,
+    DisplayProps,
+    FlexBasisProps,
+    FlexDirectionProps,
+    FlexProps,
+    FlexWrapProps,
+    FontFamilyProps,
+    FontSizeProps,
+    FontStyleProps,
+    FontWeightProps,
+    HeightProps,
+    JustifyContentProps,
+    LeftProps,
+    LineHeightProps,
+    MaxHeightProps,
+    MaxWidthProps,
+    MinHeightProps,
+    MinWidthProps,
+    OrderProps,
+    PositionProps,
+    RightProps,
+    SpaceProps,
+    style,
+    TextAlignProps,
+    TopProps,
+    WidthProps,
+    ZIndexProps
+} from 'styled-system';
 import { getColor, getTheme, getYiq, isDefined, px } from './helpers';
 import { placeholder } from './mixins';
 import { colors as colorsTheme, palette } from './theme';
@@ -39,13 +74,13 @@ export const outlines = compose(
     })
 );
 
-// outlines.propTypes = {
-//     outline: PropTypes.string,
-//     outlineColor: PropTypes.string,
-//     outlineOffset: cloneFunc(propTypes.numberOrString),
-//     outlineStyle: PropTypes.string,
-//     outlineWidth: cloneFunc(propTypes.numberOrString)
-// };
+export interface OutlinesProps {
+    outline?: string;
+    outlineColor?: string;
+    outlineOffset?: number | string;
+    outlineStyle?: string;
+    outlineWidth?: number | string;
+}
 
 export const inputTextTypes = [
     'date',
@@ -58,12 +93,49 @@ export const inputTextTypes = [
     'text'
 ];
 
-export const sizesPropTypes = PropTypes.oneOf(['sm', 'md', 'lg']);
-export const sizesAllPropTypes = PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl']);
-export const variantPropTypes = PropTypes.oneOf([
-    ...Object.keys(palette),
-    ...Object.keys(colorsTheme)
-]);
+export const sizesTypes = ['sm', 'md', 'lg'];
+export const sizesAllTypes = ['xs', 'sm', 'md', 'lg', 'xl'];
+export const variantTypes = [...Object.keys(palette), ...Object.keys(colorsTheme)];
+
+export type SizesTypes = typeof sizesTypes[number];
+export type SizesAllTypes = typeof sizesAllTypes[number];
+export type VariantTypes = typeof variantTypes[number];
+export interface BaseProps {
+    alignContent?: AlignContentProps;
+    alignItems?: AlignItemsProps;
+    alignSelf?: AlignSelfProps;
+    backgroundImage?: BackgroundImageProps;
+    borders?: BordersProps;
+    borderRadius?: BorderRadiusProps;
+    bottom?: BottomProps;
+    color?: ColorProps;
+    display?: DisplayProps;
+    flex?: FlexProps;
+    flexBasis?: FlexBasisProps;
+    flexDirection?: FlexDirectionProps;
+    flexWrap?: FlexWrapProps;
+    fontFamily?: FontFamilyProps;
+    fontSize?: FontSizeProps;
+    fontStyle?: FontStyleProps;
+    fontWeight?: FontWeightProps;
+    height?: HeightProps;
+    justifyContent?: JustifyContentProps;
+    left?: LeftProps;
+    lineHeight?: LineHeightProps;
+    maxHeight?: MaxHeightProps;
+    maxWidth?: MaxWidthProps;
+    minHeight?: MinHeightProps;
+    minWidth?: MinWidthProps;
+    order?: OrderProps;
+    position?: PositionProps;
+    right?: RightProps;
+    space?: SpaceProps;
+    textAlign?: TextAlignProps;
+    textTransform?: string;
+    top?: TopProps;
+    width?: WidthProps;
+    zIndex?: ZIndexProps;
+}
 
 export const baseStyles = {
     color: (props: any): FlattenSimpleInterpolation => {

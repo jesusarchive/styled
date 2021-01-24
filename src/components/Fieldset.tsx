@@ -1,7 +1,12 @@
 import styled, { css } from 'styled-components';
 import Box from './Box';
-import Legend from './Legend';
 import { getTheme, isDefined, px, spacer } from './utils/helpers';
+
+interface FieldsetProps {
+    children?: React.ReactNode;
+    as?: string;
+    inline?: boolean;
+}
 
 const styles = (props: any) => {
     const { borderRadius: br, inline, mb, ml, padding: pd } = props;
@@ -23,21 +28,13 @@ const styles = (props: any) => {
     `;
 };
 
-type FieldsetProps = {
-    as?: string;
-    inline?: boolean;
-};
-
-const Fieldset: React.FC<any> = styled(Box)`
+const Fieldset: React.FC<FieldsetProps> = styled(Box)`
     ${styles};
-
-    ${Legend as any} {
-        margin: 0;
-    }
 `;
 
 Fieldset.defaultProps = {
     as: 'fieldset',
     inline: false
 };
+
 export default Fieldset;

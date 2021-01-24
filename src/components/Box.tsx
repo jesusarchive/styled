@@ -24,6 +24,7 @@ import {
     gridColumn,
     gridColumnGap,
     gridGap,
+    GridProps,
     gridRow,
     gridRowGap,
     gridTemplateAreas,
@@ -46,13 +47,14 @@ import {
     width,
     zIndex
 } from 'styled-system';
-import { textTransform } from './utils/system';
+import { BaseProps, textTransform } from './utils/system';
 
-type BoxProps = {
+interface BoxProps extends BaseProps, GridProps {
+    children: React.ReactNode;
     as?: string;
-};
+}
 
-const Box: React.FC<any> = styled.div(
+const Box = styled.div<BoxProps>(
     {
         boxSizing: 'border-box'
     },

@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 import Box from './Box';
 import { getTheme, isDefined, px, responsive, spacer } from './utils/helpers';
+import { BaseProps } from './utils/system';
 
 const styles = (props: any) => {
     const { ml, mr, pb, pl, pr, pt } = props;
@@ -45,15 +46,22 @@ const styles = (props: any) => {
         ${grid};
     `;
 };
-type ContainerProps = {
-    layout?: 'flex' | 'fullScreen';
+
+const layoutTypes = ['flex', 'fullScreen'];
+
+type LayoutTypes = typeof layoutTypes[number];
+interface ContainerProps extends BaseProps {
+    children?: React.ReactNode;
+    layout?: LayoutTypes;
     verticalPadding?: boolean;
-};
-const Container: React.FC<any> = styled(Box)`
+}
+
+const Container: React.FC<ContainerProps> = styled(Box)`
     ${styles};
 `;
 
 Container.defaultProps = {
     verticalPadding: false
 };
+
 export default Container;

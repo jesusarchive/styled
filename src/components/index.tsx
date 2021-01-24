@@ -1,6 +1,4 @@
 export { default as Alert } from './Alert';
-export { default as Badge } from './Badge';
-export { default as Box } from './Box';
 export { default as Button } from './Button';
 export { default as ButtonGroup, StyledButtonGroup } from './ButtonGroup';
 export { default as Code } from './Code';
@@ -28,3 +26,4 @@ export { default as Textarea } from './Textarea';
 
 export * as utils from './utils/helpers';
 export * as theme from './utils/theme';
+export { default as BaseProps } from './Box';

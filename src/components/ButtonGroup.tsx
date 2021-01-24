@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Box from './Box';
+import { BaseProps, SizesAllTypes, VariantTypes } from './utils/system';
 
 export const StyledButtonGroup = styled(Box)`
     display: inline-flex;
@@ -26,12 +27,13 @@ export const StyledButtonGroup = styled(Box)`
     }
 `;
 
-type ButtonGroupProps = {
-    size?: any;
-    variant?: any;
-};
+interface ButtonGroupProps extends BaseProps {
+    children?: React.ReactNode;
+    size?: SizesAllTypes;
+    variant?: VariantTypes;
+}
 
-const ButtonGroup: React.FC<any> = ({ children, size, variant, ...props }: any) => {
+const ButtonGroup: React.FC<ButtonGroupProps> = ({ children, size, variant, ...props }: any) => {
     const buttonProps = {
         size,
         variant

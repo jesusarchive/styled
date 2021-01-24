@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import styled from 'styled-components';
 import Box from './Box';
+import { BaseProps } from './utils/system';
 
 const StyledEmbed = styled(Box)`
     overflow: hidden;
@@ -18,14 +20,17 @@ const StyledEmbed = styled(Box)`
     }
 `;
 
-type EmbedProps = {
+interface EmbedProps extends BaseProps {
+    children?: React.ReactNode;
     ratio?: number;
-};
+}
 
-const Embed: React.FC<any> = (
-    { children, ...props }: any = {
-        ratio: 9 / 16
-    }
-) => <StyledEmbed dangerouslySetInnerHTML={{ __html: children }} {...props} />;
+const Embed: React.FC<EmbedProps> = ({ children, ...props }: any) => (
+    <StyledEmbed dangerouslySetInnerHTML={{ __html: children }} {...props} />
+);
+
+Embed.defaultProps = {
+    ratio: 9 / 16
+};
 
 export default Embed;
