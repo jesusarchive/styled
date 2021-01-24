@@ -1,23 +1,23 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import styled, { css } from 'styled-components';
 import Box from './Box';
+import { BaseProps } from './utils/system';
 
-type ImageProps = {
+interface ImageProps extends BaseProps {
     alt: string;
     as?: string;
     src: string;
-};
+}
 
-const Image: React.FC<any> = styled(Box)(
-    (
-        props = {
-            as: 'img'
-        }
-    ) => {
-        const { maxWidth } = props;
-        return css`
-            max-width: ${maxWidth || '100%'};
-        `;
-    }
-);
+const Image: React.FC<ImageProps> = styled(Box)((props) => {
+    const { maxWidth = '100%' } = props;
+    return css`
+        max-width: ${maxWidth as any};
+    `;
+});
+
+Image.defaultProps = {
+    as: 'img'
+};
 
 export default Image;

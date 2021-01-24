@@ -1,8 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import styled, { css } from 'styled-components';
 import Box from './Box';
 import Flex from './Flex';
 import { getTheme, isDefined, px } from './utils/helpers';
+import { BaseProps } from './utils/system';
 
 const styles = (props: any) => {
     const { bordered, mb, textAlign } = props;
@@ -22,7 +24,7 @@ const margin = (props: any) => {
 export const StyledFormGroup = styled(Box)`
     ${styles};
 
-    ${({ inline }) => {
+    ${({ inline }: any) => {
         if (inline) return '';
         return `
       label + label {
@@ -63,18 +65,14 @@ const HelpText = styled.small`
     ${helpBlock};
 `;
 
-type FormGroupProps = {
+interface FormGroupProps extends BaseProps {
+    children?: React.ReactNode;
     bordered?: boolean;
     helpText?: string;
     inline?: boolean;
-};
+}
 
-const FormGroup: React.FC<FormGroupProps> = (
-    { children, helpText, inline, ...props }: any = {
-        bordered: false,
-        inline: false
-    }
-) => {
+const FormGroup: React.FC<FormGroupProps> = ({ children, helpText, inline, ...props }: any) => {
     const helpComponent = helpText && <HelpText>{helpText}</HelpText>;
     let content = (
         <React.Fragment>
@@ -90,6 +88,11 @@ const FormGroup: React.FC<FormGroupProps> = (
             {content}
         </StyledFormGroup>
     );
+};
+
+FormGroup.defaultProps = {
+    bordered: false,
+    inline: false
 };
 
 export default FormGroup;

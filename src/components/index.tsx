@@ -1,3 +1,4 @@
+export { default as Box } from './Box';
 export { default as Alert } from './Alert';
 export { default as Button } from './Button';
 export { default as ButtonGroup, StyledButtonGroup } from './ButtonGroup';
@@ -26,4 +27,3 @@ export { default as Textarea } from './Textarea';
 
 export * as utils from './utils/helpers';
 export * as theme from './utils/theme';
-export { default as BaseProps } from './Box';

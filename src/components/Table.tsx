@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import styled, { css } from 'styled-components';
 import Box from './Box';
 import { getTheme, px } from './utils/helpers';
+import { BaseProps, SizesTypes } from './utils/system';
 
 const styles = (props: any) => {
     const { bordered, borderless, inverted } = props;
@@ -91,15 +93,16 @@ const stylesStriped = (props: any) => {
     return '';
 };
 
-type TableProps = {
-    as?: string;
-    bordered?: boolean;
-    borderless?: boolean;
-    head?: 'light' | 'dark';
-    inverted?: boolean;
-    size?: any;
-    striped?: boolean;
-};
+interface TableProps extends BaseProps {
+    children: React.ReactNode;
+    as: string;
+    bordered: boolean;
+    borderless: boolean;
+    head: 'light' | 'dark';
+    inverted: boolean;
+    size: SizesTypes;
+    striped: boolean;
+}
 
 const Table: React.FC<any> = styled(Box)`
     ${styles};

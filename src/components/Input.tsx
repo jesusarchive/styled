@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import styled, { css } from 'styled-components';
 import Box from './Box';
 import { getTheme, isDefined, px } from './utils/helpers';
-import { formPseudo, inputTextTypes } from './utils/system';
+import { BaseProps, formPseudo, inputTextTypes, OutlinesProps } from './utils/system';
 
 const styles = (props: any) => {
     const {
@@ -61,7 +62,7 @@ const styles = (props: any) => {
     `;
 };
 
-type InputProps = {
+interface InputProps extends BaseProps, OutlinesProps {
     accept?: string;
     as?: string;
     autoComplete?: string;
@@ -95,23 +96,21 @@ type InputProps = {
         | 'text';
     valid?: boolean;
     value?: string | number;
-};
+}
 
-const Input: React.FC<any> = styled(Box).attrs(
-    (
-        { id, name } = {
-            as: 'input',
-            bordered: true,
-            size: 'md',
-            type: 'text',
-            value: undefined
-        }
-    ) => ({
-        id: id || name
-    })
-)`
+const Input: React.FC<any> = styled(Box).attrs(({ id, name }: any) => ({
+    id: id || name
+}))`
     ${styles};
     ${formPseudo};
 `;
+
+Input.defaultProps = {
+    as: 'input',
+    bordered: true,
+    size: 'md',
+    type: 'text',
+    value: undefined
+};
 
 export default Input;

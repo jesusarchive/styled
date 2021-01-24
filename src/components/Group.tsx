@@ -1,8 +1,14 @@
+import React from 'react';
 import styled from 'styled-components';
 import Box from './Box';
 import { spacer } from './utils/helpers';
+import { BaseProps } from './utils/system';
 
-const Group: React.FC<any> = styled(Box)`
+interface GroupProps extends BaseProps {
+    children: React.ReactNode;
+}
+
+const Group: React.FC<GroupProps> = styled(Box)`
     align-items: center;
     display: flex;
     flex-wrap: wrap;

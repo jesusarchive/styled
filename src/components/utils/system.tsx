@@ -102,7 +102,7 @@ export type SizesAllTypes = typeof sizesAllTypes[number];
 export type VariantTypes = typeof variantTypes[number];
 export interface BaseProps {
     alignContent?: AlignContentProps;
-    alignItems?: AlignItemsProps;
+    alignItems?: AlignItemsProps | string;
     alignSelf?: AlignSelfProps;
     backgroundImage?: BackgroundImageProps;
     borders?: BordersProps;

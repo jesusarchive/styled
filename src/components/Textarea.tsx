@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import styled, { css } from 'styled-components';
 import Box from './Box';
 import { getTheme, isDefined, px } from './utils/helpers';
-import { formPseudo } from './utils/system';
+import { BaseProps, formPseudo, OutlinesProps, SizesTypes } from './utils/system';
 
 const styles = (props: any) => {
     const {
@@ -51,7 +52,7 @@ const styles = (props: any) => {
     `;
 };
 
-type TextareaProps = {
+interface TextareaProps extends BaseProps, OutlinesProps {
     as?: string;
     bordered?: boolean;
     defaultValue?: number | string;
@@ -64,28 +65,25 @@ type TextareaProps = {
     readOnly?: boolean;
     required?: boolean;
     rows?: number;
-    size?: any;
+    size?: SizesTypes;
     tabindex?: number;
     valid?: boolean;
     value?: string;
     wrap?: 'soft' | 'hard';
-};
+}
 
-const Textarea: React.FC<any> = styled(Box).attrs(
-    (
-        { id, name, ...props } = {
-            as: 'textarea',
-            bordered: true,
-            rows: 3,
-            size: 'md'
-        }
-    ) => ({
-        id: id || name,
-        ...props
-    })
-)`
+const Textarea: React.FC<any> = styled(Box).attrs(({ id, name }: any) => ({
+    id: id || name
+}))`
     ${styles};
     ${formPseudo};
 `;
+
+Textarea.defaultProps = {
+    as: 'textarea',
+    bordered: true,
+    rows: 3,
+    size: 'md'
+};
 
 export default Textarea;

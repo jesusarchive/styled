@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import styled, { css } from 'styled-components';
 import Box from './Box';
 import { getTheme, isDefined, px } from './utils/helpers';
+import { BaseProps, SizesTypes } from './utils/system';
 
 const styles = (props: any) => {
     const { as, bordered, inline, m, styleType } = props;
@@ -33,16 +35,17 @@ const stylesSibling = (props: any) => {
     `;
 };
 
-type ListProps = {
+interface ListProps extends BaseProps {
+    children?: React.ReactNode;
     as?: 'ul' | 'ol';
     bordered?: boolean;
     inline?: boolean;
     reversed?: boolean;
-    size?: any;
+    size?: SizesTypes;
     start?: number;
     styleType?: ('disc' | 'circle' | 'square' | 'decimal' | 'lower-alpha' | 'none') | string;
     type?: '1' | 'a' | 'A' | 'i' | 'I';
-};
+}
 
 const List: React.FC<any> = styled(Box)`
     ${styles};

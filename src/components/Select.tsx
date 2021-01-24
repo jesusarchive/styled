@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import styled, { css } from 'styled-components';
 import Box from './Box';
 import { getDimmerColor, getTheme, isDefined, lighten, px } from './utils/helpers';
-import { formPseudo } from './utils/system';
+import { BaseProps, formPseudo, OutlinesProps, SizesTypes } from './utils/system';
 
 const select = (props: any) => {
     const {
@@ -74,18 +75,19 @@ const select = (props: any) => {
     `;
 };
 
-type SelectProps = {
+interface SelectProps extends BaseProps, OutlinesProps {
+    children?: React.ReactNode;
     as?: string;
     bordered?: boolean;
     disabled?: boolean;
     multiple?: boolean;
     required?: boolean;
     size?: number;
-    sizing?: any;
+    sizing?: SizesTypes;
     valid?: boolean;
-};
+}
 
-const Select: React.FC<any> = styled(Box)`
+const Select: React.FC<SelectProps> = styled(Box)`
     ${select};
     ${formPseudo};
 `;

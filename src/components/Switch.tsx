@@ -64,7 +64,7 @@ const StyledButton: React.FC<any> = styled.span`
     ${stylesButton};
 `;
 
-export const StyledSwitch = styled(Box)`
+export const StyledSwitch: React.FC<any> = styled(Box)`
     ${styles};
 `;
 

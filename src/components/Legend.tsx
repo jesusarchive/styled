@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import Box from './Box';
 import { getTheme, isDefined, px } from './utils/helpers';
-import { baseStyles } from './utils/system';
+import { BaseProps, baseStyles } from './utils/system';
 
 const styles = (props: any) => {
     const { color: cl, fontFamily, fontWeight: fw, lineHeight, mb } = props;
@@ -17,11 +17,12 @@ const styles = (props: any) => {
     `;
 };
 
-type LegendProps = {
+interface LegendProps extends BaseProps {
+    children?: React.ReactNode;
     as?: string;
-};
+}
 
-const Legend: React.FC<any> = styled(Box)`
+const Legend: React.FC<LegendProps> = styled(Box)`
     ${styles};
 `;
 
