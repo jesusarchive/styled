@@ -3,7 +3,6 @@ import styled, { css } from 'styled-components';
 import Box from './Box';
 import { getTheme, px } from './utils/helpers';
 import { BaseProps, SizesTypes } from './utils/system';
-import styled, { css } from 'styled-components';
 
 const styles = (props: any) => {
   const { bordered, borderless, inverted } = props;
