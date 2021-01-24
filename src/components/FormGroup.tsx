@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import styled, { css } from 'styled-components';
 import Box from './Box';
@@ -7,92 +6,92 @@ import { getTheme, isDefined, px } from './utils/helpers';
 import { BaseProps } from './utils/system';
 
 const styles = (props: any) => {
-    const { bordered, mb, textAlign } = props;
-    const { borderColor, borderRadius, marginBottom, padding } = getTheme(props, 'formGroup');
-    return css`
-        ${bordered ? `border: 1px solid ${borderColor};` : ''}
-        ${bordered ? `border-radius: ${px(borderRadius)};` : ''}
+  const { bordered, mb, textAlign } = props;
+  const { borderColor, borderRadius, marginBottom, padding } = getTheme(props, 'formGroup');
+  return css`
+    ${bordered ? `border: 1px solid ${borderColor};` : ''}
+    ${bordered ? `border-radius: ${px(borderRadius)};` : ''}
     margin-bottom: ${px(isDefined(mb) ? mb : marginBottom)};
-        ${bordered ? `padding: ${px(padding)};` : ''};
-        text-align: ${textAlign || 'left'};
-    `;
+    ${bordered ? `padding: ${px(padding)};` : ''};
+    text-align: ${textAlign || 'left'};
+  `;
 };
 const margin = (props: any) => {
-    const { inlineMargin } = getTheme(props, 'formGroup');
-    return px(inlineMargin);
+  const { inlineMargin } = getTheme(props, 'formGroup');
+  return px(inlineMargin);
 };
 export const StyledFormGroup = styled(Box)`
-    ${styles};
+  ${styles};
 
-    ${({ inline }: any) => {
-        if (inline) return '';
-        return `
+  ${({ inline }: any) => {
+    if (inline) return '';
+    return `
       label + label {
         margin-top: 6px;
        }
     `;
-    }};
+  }};
 
-    ${Flex as any} {
-        label,
-        legend {
-            margin-bottom: 0;
-            margin-right: ${margin};
-        }
-
-        input {
-            flex: 1;
-            width: auto;
-        }
-
-        small {
-            margin-left: ${margin};
-            margin-top: 0;
-        }
+  ${Flex as any} {
+    label,
+    legend {
+      margin-bottom: 0;
+      margin-right: ${margin};
     }
+
+    input {
+      flex: 1;
+      width: auto;
+    }
+
+    small {
+      margin-left: ${margin};
+      margin-top: 0;
+    }
+  }
 `;
 const helpBlock = (props: any) => {
-    const { helpColor, helpMarginTop } = getTheme(props, 'formGroup');
-    return css`
-        color: ${helpColor};
-        display: block;
-        font-size: 85%;
-        line-height: 1.3;
-        margin-top: ${px(helpMarginTop)};
-    `;
+  const { helpColor, helpMarginTop } = getTheme(props, 'formGroup');
+  return css`
+    color: ${helpColor};
+    display: block;
+    font-size: 85%;
+    line-height: 1.3;
+    margin-top: ${px(helpMarginTop)};
+  `;
 };
 const HelpText = styled.small`
-    ${helpBlock};
+  ${helpBlock};
 `;
 
 interface FormGroupProps extends BaseProps {
-    children?: React.ReactNode;
-    bordered?: boolean;
-    helpText?: string;
-    inline?: boolean;
+  children?: React.ReactNode;
+  bordered?: boolean;
+  helpText?: string;
+  inline?: boolean;
 }
 
 const FormGroup: React.FC<FormGroupProps> = ({ children, helpText, inline, ...props }: any) => {
-    const helpComponent = helpText && <HelpText>{helpText}</HelpText>;
-    let content = (
-        <React.Fragment>
-            {children}
-            {helpComponent}
-        </React.Fragment>
-    );
-    if (inline) {
-        content = <Flex alignItems="center">{content}</Flex>;
-    }
-    return (
-        <StyledFormGroup inline={inline} {...props}>
-            {content}
-        </StyledFormGroup>
-    );
+  const helpComponent = helpText && <HelpText>{helpText}</HelpText>;
+  let content = (
+    <React.Fragment>
+      {children}
+      {helpComponent}
+    </React.Fragment>
+  );
+  if (inline) {
+    content = <Flex alignItems="center">{content}</Flex>;
+  }
+  return (
+    <StyledFormGroup inline={inline} {...props}>
+      {content}
+    </StyledFormGroup>
+  );
 };
 
 FormGroup.defaultProps = {
-    bordered: false,
-    inline: false
+  bordered: false,
+  inline: false
 };
 
 export default FormGroup;

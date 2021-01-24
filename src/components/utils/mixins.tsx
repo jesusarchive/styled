@@ -1,5 +1,5 @@
 export function placeholder(content: string): string {
-    return `
+  return `
     &::-webkit-input-placeholder {
       ${content};
     }

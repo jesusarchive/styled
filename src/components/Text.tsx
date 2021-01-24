@@ -4,14 +4,14 @@ import Box from './Box';
 import { BaseProps } from './utils/system';
 
 interface TextProps extends BaseProps {
-    children?: React.ReactNode;
-    as?: string;
+  children?: React.ReactNode;
+  as?: string;
 }
 
 const Text: React.FC<TextProps> = styled(Box)({});
 
 Text.defaultProps = {
-    as: 'span'
+  as: 'span'
 };
 
 export default Text;
