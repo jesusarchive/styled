@@ -1,4 +1,8 @@
-# Getting Started with Create React App
+# React TypeScript Styled Components 💅
+
+Create React App + [styled-minimal](https://github.com/gilbarbara/styled-minimal) components source, migrated to TypeScript.
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
