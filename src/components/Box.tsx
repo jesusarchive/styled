@@ -51,7 +51,7 @@ import {
 import { BaseProps, textTransform } from './utils/system';
 
 interface BoxProps extends BaseProps, GridProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   as?: string;
 }
 

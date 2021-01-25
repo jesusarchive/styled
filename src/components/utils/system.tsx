@@ -40,7 +40,6 @@ import {
   WidthProps,
   ZIndexProps
 } from 'styled-system';
-
 import { getColor, getTheme, getYiq, isDefined, px } from './helpers';
 import { placeholder } from './mixins';
 import { colors as colorsTheme, palette } from './theme';
@@ -91,42 +90,40 @@ export const variantTypes = [...Object.keys(palette), ...Object.keys(colorsTheme
 export type SizesTypes = typeof sizesTypes[number];
 export type SizesAllTypes = typeof sizesAllTypes[number];
 export type VariantTypes = typeof variantTypes[number];
-export interface BaseProps {
-  alignContent?: AlignContentProps;
-  alignItems?: AlignItemsProps | string;
-  alignSelf?: AlignSelfProps;
-  backgroundImage?: BackgroundImageProps;
-  borders?: BordersProps;
-  borderRadius?: BorderRadiusProps;
-  bottom?: BottomProps;
-  color?: ColorProps;
-  display?: DisplayProps;
-  flex?: FlexProps;
-  flexBasis?: FlexBasisProps;
-  flexDirection?: FlexDirectionProps;
-  flexWrap?: FlexWrapProps;
-  fontFamily?: FontFamilyProps;
-  fontSize?: FontSizeProps;
-  fontStyle?: FontStyleProps;
-  fontWeight?: FontWeightProps;
-  height?: HeightProps;
-  justifyContent?: JustifyContentProps;
-  left?: LeftProps;
-  lineHeight?: LineHeightProps;
-  maxHeight?: MaxHeightProps;
-  maxWidth?: MaxWidthProps;
-  minHeight?: MinHeightProps;
-  minWidth?: MinWidthProps;
-  order?: OrderProps;
-  position?: PositionProps;
-  right?: RightProps;
-  space?: SpaceProps;
-  textAlign?: TextAlignProps;
-  textTransform?: string;
-  top?: TopProps;
-  width?: WidthProps;
-  zIndex?: ZIndexProps;
-}
+export interface BaseProps
+  extends AlignContentProps,
+    AlignItemsProps,
+    AlignSelfProps,
+    BackgroundImageProps,
+    BorderRadiusProps,
+    BordersProps,
+    BottomProps,
+    ColorProps,
+    DisplayProps,
+    FlexBasisProps,
+    FlexDirectionProps,
+    FlexProps,
+    FlexWrapProps,
+    FontFamilyProps,
+    FontSizeProps,
+    FontStyleProps,
+    FontWeightProps,
+    HeightProps,
+    JustifyContentProps,
+    LeftProps,
+    LineHeightProps,
+    MaxHeightProps,
+    MaxWidthProps,
+    MinHeightProps,
+    MinWidthProps,
+    OrderProps,
+    PositionProps,
+    RightProps,
+    SpaceProps,
+    TextAlignProps,
+    TopProps,
+    WidthProps,
+    ZIndexProps {}
 
 export const baseStyles = {
   color: (props: any): FlattenSimpleInterpolation => {

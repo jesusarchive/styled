@@ -72,8 +72,9 @@ interface TextareaProps extends BaseProps, OutlinesProps {
   wrap?: 'soft' | 'hard';
 }
 
-const Textarea: React.FC<any> = styled(Box).attrs(({ id, name }: any) => ({
-  id: id || name
+const Textarea: React.FC<any> = styled(Box).attrs((props: any) => ({
+  ...props,
+  id: props.id || props.name
 }))`
   ${styles};
   ${formPseudo};
