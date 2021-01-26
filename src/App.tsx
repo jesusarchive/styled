@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Heading } from './components';
+import { Alert, Box, Container, Heading } from './components';
 
 const App: React.FC = () => {
   return (
@@ -11,6 +11,12 @@ const App: React.FC = () => {
             💅
           </span>
         </Heading>
+        <Box bg="red" color="white">
+          box
+        </Box>
+        <Alert bg="red" color="black">
+          Alert
+        </Alert>
       </Container>
     </div>
   );
