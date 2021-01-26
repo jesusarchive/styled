@@ -13,25 +13,28 @@ interface AlertProps extends BaseProps {
   variant?: VariantTypes;
 }
 
-const Alert: React.FC<AlertProps> = styled(Box).attrs({
-  role: 'alert'
-})((props) => {
-  const { borderRadius: br, lineHeight, size, width } = props as any;
+const styles = (props: AlertProps) => {
+  const { borderRadius: br, lineHeight, size, width } = props;
   const { borderRadius, maxWidth, padding } = getTheme(props, 'alert');
+
   return css`
     ${baseStyles.variant};
     border-radius: ${px(isDefined(br) ? br : borderRadius)};
     font-size: ${baseStyles.fontSize};
-    line-height: ${lineHeight || baseStyles.lineHeight};
+    line-height: ${px(lineHeight as any) || baseStyles.lineHeight};
     max-width: ${px(maxWidth)};
-    padding: ${px(padding[size][0])} ${px(padding[size][1])};
-    width: ${width || '100%'};
+    padding: ${px(padding[size as any][0])} ${px(padding[size as any][1])};
+    width: ${px(width as any) || '100%'};
 
     a {
       ${baseStyles.color};
     }
   `;
-});
+};
+
+const Alert: React.FC = styled(Box)<AlertProps>`
+  ${styles};
+`;
 
 Alert.defaultProps = {
   bordered: false,

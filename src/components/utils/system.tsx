@@ -2,7 +2,7 @@
 import darken from 'polished/lib/color/darken';
 import desaturate from 'polished/lib/color/desaturate';
 import lighten from 'polished/lib/color/lighten';
-import { css, FlattenSimpleInterpolation } from 'styled-components';
+import { css } from 'styled-components';
 import {
   BackgroundProps,
   BorderProps,
@@ -78,7 +78,7 @@ export interface BaseProps
     PositionProps {}
 
 export const baseStyles = {
-  color: (props: any): FlattenSimpleInterpolation => {
+  color: (props: any): any => {
     const { dark, outline } = props;
     const colors = getTheme(props, 'colors');
     const currentColor = getColor(props);
@@ -90,7 +90,7 @@ export const baseStyles = {
       color: ${baseColor};
     `;
   },
-  variant: (props: any): FlattenSimpleInterpolation => {
+  variant: (props: any): any => {
     const { dark, bordered } = props;
     const { colors, darkColor } = getTheme(props);
     const themeColor = getColor(props);

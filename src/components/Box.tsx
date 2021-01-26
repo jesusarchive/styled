@@ -8,19 +8,17 @@ export interface BoxProps extends BaseProps {
   as?: string;
 }
 
-const Box = styled.div<BoxProps>(
-  {
-    boxSizing: 'border-box'
-  },
-  space,
-  layout,
-  color,
-  border,
-  flexbox,
-  grid,
-  typography,
-  background,
-  position
-);
+const Box: React.FC<BoxProps> = styled.div`
+  box-sizing: 'border-box';
+  ${space}
+  ${layout} 
+  ${color} 
+  ${border} 
+  ${flexbox} 
+  ${grid} 
+  ${typography} 
+  ${background}
+  ${position};
+`;
 
 export default Box;
