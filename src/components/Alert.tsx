@@ -5,7 +5,7 @@ import { getTheme, isDefined, px } from './utils/helpers';
 import { BaseProps, baseStyles, SizesTypes, VariantTypes } from './utils/system';
 
 interface AlertProps extends BaseProps {
-  children?: React.ReactNode;
+  children?: any;
   as?: string;
   bordered?: boolean;
   dark?: boolean;
@@ -32,7 +32,7 @@ const styles = (props: AlertProps) => {
   `;
 };
 
-const Alert: React.FC = styled(Box)<AlertProps>`
+const Alert: React.FC<AlertProps> = styled(Box)`
   ${styles};
 `;
 
