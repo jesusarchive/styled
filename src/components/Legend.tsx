@@ -17,7 +17,7 @@ const styles = (props: LegendProps) => {
     display: block;
     font-family: ${fontFamily || 'inherit'};
     font-weight: ${fw || fontWeight};
-    line-height: ${lineHeight || baseStyles.lineHeight};
+    line-height: ${(lineHeight as any) || baseStyles.lineHeight};
     margin-bottom: ${px(isDefined(mb) ? mb : marginBottom)};
     white-space: nowrap;
   `;
