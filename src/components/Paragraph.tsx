@@ -1,7 +1,7 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import Box from './Box';
-import { isDefined, spacer } from './utils/helpers';
+import { spacer } from './utils/helpers';
 import { BaseProps } from './utils/system';
 
 interface ParagraphProps extends BaseProps {
@@ -9,19 +9,16 @@ interface ParagraphProps extends BaseProps {
   as?: string;
 }
 
-const Paragraph: React.FC<ParagraphProps> = styled(Box)(
-  ({ mb, mt }: any) => css`
-    margin-bottom: ${isDefined(mb) ? mb : 0};
-    margin-top: ${isDefined(mt) ? mt : 0};
-
-    & + & {
-      margin-top: ${spacer(2)};
-    }
-  `
-);
+const Paragraph: React.FC<ParagraphProps> = styled(Box)`
+  & + & {
+    margin-top: ${spacer(2)};
+  }
+`;
 
 Paragraph.defaultProps = {
-  as: 'p'
+  as: 'p',
+  mb: '0',
+  mt: '0'
 };
 
 export default Paragraph;

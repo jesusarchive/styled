@@ -3,7 +3,19 @@ import Box from './Box';
 import { getDimmerColor, getTheme, isDefined, lighten, px } from './utils/helpers';
 import { BaseProps, formPseudo, OutlinesProps, SizesTypes } from './utils/system';
 
-const select = (props: any) => {
+interface SelectProps extends BaseProps, OutlinesProps {
+  children?: React.ReactNode;
+  as?: string;
+  bordered?: boolean;
+  disabled?: boolean;
+  multiple?: boolean;
+  required?: boolean;
+  size?: number;
+  sizing?: SizesTypes;
+  valid?: boolean;
+}
+
+const select = (props: SelectProps) => {
   const {
     bg,
     bordered,
@@ -47,20 +59,20 @@ const select = (props: any) => {
     border-radius: ${px(isDefined(br) ? br : borderRadius)};
     color: ${cl || color};
     display: block;
-    ${!multiple ? `height: ${px(h || height[sizing])}` : ''};
+    ${!multiple ? `height: ${px(h || height[sizing as any])}` : ''};
     font-family: ${fontFamily || 'inherit'};
-    font-size: ${px(fz || fontSize[sizing])};
+    font-size: ${px(fz || fontSize[sizing as any])};
     line-height: ${lh || lineHeight};
-    ${!multiple ? `padding: ${px(isDefined(pd) ? pd : padding[sizing])};` : ''};
+    ${!multiple ? `padding: ${px(isDefined(pd) ? pd : padding[sizing as any])};` : ''};
     white-space: nowrap;
     width: ${width || '100%'};
 
     > option {
       background-color: ${bordered ? currentBgColor : getDimmerColor(currentBgColor)};
       color: ${cl || color};
-      font-size: ${px(fz || fontSize[sizing])};
+      font-size: ${px(fz || fontSize[sizing as any])};
       line-height: ${lh || lineHeight};
-      padding: ${px(isDefined(pd) ? pd : padding[sizing])};
+      padding: ${px(isDefined(pd) ? pd : padding[sizing as any])};
     }
 
     &[multiple] {
@@ -73,18 +85,6 @@ const select = (props: any) => {
     }
   `;
 };
-
-interface SelectProps extends BaseProps, OutlinesProps {
-  children?: React.ReactNode;
-  as?: string;
-  bordered?: boolean;
-  disabled?: boolean;
-  multiple?: boolean;
-  required?: boolean;
-  size?: number;
-  sizing?: SizesTypes;
-  valid?: boolean;
-}
 
 const Select: React.FC<SelectProps> = styled(Box)`
   ${select};

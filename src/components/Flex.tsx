@@ -8,12 +8,13 @@ interface FlexProps extends BaseProps {
   as?: string;
 }
 
-const Flex: React.FC<FlexProps> = styled(Box)({
-  display: 'flex'
-});
+const Flex: React.FC<FlexProps> = styled(Box)`
+  display: 'flex';
+`;
 
 Flex.defaultProps = {
-  alignItems: 'center' as any
+  display: 'flex',
+  alignItems: 'center'
 };
 
 export default Flex;

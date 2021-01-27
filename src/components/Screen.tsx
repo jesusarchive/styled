@@ -8,10 +8,10 @@ interface ScreenProps extends BaseProps {
   as?: string;
 }
 
-const Screen: React.FC<ScreenProps> = styled(Box)({});
+const Screen: React.FC<ScreenProps> = styled(Box)``;
 
 Screen.defaultProps = {
-  minHeight: '100vh' as any
+  minHeight: '100vh'
 };
 
 export default Screen;

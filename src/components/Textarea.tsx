@@ -4,7 +4,27 @@ import Box from './Box';
 import { getTheme, isDefined, px } from './utils/helpers';
 import { BaseProps, formPseudo, OutlinesProps, SizesTypes } from './utils/system';
 
-const styles = (props: any) => {
+interface TextareaProps extends BaseProps, OutlinesProps {
+  as?: string;
+  bordered?: boolean;
+  defaultValue?: number | string;
+  disabled?: boolean;
+  id?: string;
+  maxlength?: number;
+  minlength?: number;
+  name?: string;
+  placeholder?: string;
+  readOnly?: boolean;
+  required?: boolean;
+  rows?: number;
+  size?: SizesTypes;
+  tabindex?: number;
+  valid?: boolean;
+  value?: string;
+  wrap?: 'soft' | 'hard';
+}
+
+const styles = (props: TextareaProps) => {
   const {
     bg,
     bordered,
@@ -44,38 +64,15 @@ const styles = (props: any) => {
     color: ${cl || color};
     display: block;
     font-family: ${fontFamily || 'inherit'};
-    font-size: ${px(fz || fontSize[size])};
+    font-size: ${px(fz || fontSize[size as any])};
     line-height: ${lh || lineHeight};
     margin: 0;
-    padding: ${px(isDefined(pd) ? pd : padding[size])};
+    padding: ${px(isDefined(pd) ? pd : padding[size as any])};
     width: ${width || '100%'};
   `;
 };
 
-interface TextareaProps extends BaseProps, OutlinesProps {
-  as?: string;
-  bordered?: boolean;
-  defaultValue?: number | string;
-  disabled?: boolean;
-  id?: string;
-  maxlength?: number;
-  minlength?: number;
-  name?: string;
-  placeholder?: string;
-  readOnly?: boolean;
-  required?: boolean;
-  rows?: number;
-  size?: SizesTypes;
-  tabindex?: number;
-  valid?: boolean;
-  value?: string;
-  wrap?: 'soft' | 'hard';
-}
-
-const Textarea: React.FC<any> = styled(Box).attrs((props: any) => ({
-  ...props,
-  id: props.id || props.name
-}))`
+const Textarea: React.FC<TextareaProps> = styled(Box)`
   ${styles};
   ${formPseudo};
 `;

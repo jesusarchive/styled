@@ -5,51 +5,13 @@ import Flex from './Flex';
 import { getTheme, isDefined, px } from './utils/helpers';
 import { BaseProps } from './utils/system';
 
-const styles = (props: any) => {
-  const { bordered, mb, textAlign } = props;
-  const { borderColor, borderRadius, marginBottom, padding } = getTheme(props, 'formGroup');
-  return css`
-    ${bordered ? `border: 1px solid ${borderColor};` : ''}
-    ${bordered ? `border-radius: ${px(borderRadius)};` : ''}
-    margin-bottom: ${px(isDefined(mb) ? mb : marginBottom)};
-    ${bordered ? `padding: ${px(padding)};` : ''};
-    text-align: ${textAlign || 'left'};
-  `;
-};
-const margin = (props: any) => {
-  const { inlineMargin } = getTheme(props, 'formGroup');
-  return px(inlineMargin);
-};
-export const StyledFormGroup = styled(Box)`
-  ${styles};
+interface FormGroupProps extends BaseProps {
+  children?: React.ReactNode;
+  bordered?: boolean;
+  helpText?: string;
+  inline?: boolean;
+}
 
-  ${({ inline }: any) => {
-    if (inline) return '';
-    return `
-      label + label {
-        margin-top: 6px;
-       }
-    `;
-  }};
-
-  ${Flex as any} {
-    label,
-    legend {
-      margin-bottom: 0;
-      margin-right: ${margin};
-    }
-
-    input {
-      flex: 1;
-      width: auto;
-    }
-
-    small {
-      margin-left: ${margin};
-      margin-top: 0;
-    }
-  }
-`;
 const helpBlock = (props: any) => {
   const { helpColor, helpMarginTop } = getTheme(props, 'formGroup');
   return css`
@@ -60,16 +22,58 @@ const helpBlock = (props: any) => {
     margin-top: ${px(helpMarginTop)};
   `;
 };
+
 const HelpText = styled.small`
   ${helpBlock};
 `;
 
-interface FormGroupProps extends BaseProps {
-  children?: React.ReactNode;
-  bordered?: boolean;
-  helpText?: string;
-  inline?: boolean;
-}
+const margin = (props: any) => {
+  const { inlineMargin } = getTheme(props, 'formGroup');
+  return px(inlineMargin);
+};
+
+const styles = (props: FormGroupProps) => {
+  const { bordered, mb, textAlign } = props;
+  const { borderColor, borderRadius, marginBottom, padding } = getTheme(props, 'formGroup');
+  return css`
+    ${bordered ? `border: 1px solid ${borderColor};` : ''}
+    ${bordered ? `border-radius: ${px(borderRadius)};` : ''}
+    margin-bottom: ${px(isDefined(mb) ? mb : marginBottom)};
+    ${bordered ? `padding: ${px(padding)};` : ''};
+    text-align: ${textAlign || 'left'};
+
+    ${({ inline }: any) => {
+      if (inline) return '';
+      return `
+      label + label {
+        margin-top: 6px;
+       }
+    `;
+    }};
+
+    ${Flex as any} {
+      label,
+      legend {
+        margin-bottom: 0;
+        margin-right: ${margin};
+      }
+
+      input {
+        flex: 1;
+        width: auto;
+      }
+
+      small {
+        margin-left: ${margin};
+        margin-top: 0;
+      }
+    }
+  `;
+};
+
+export const StyledFormGroup = styled(Box)`
+  ${styles};
+`;
 
 const FormGroup: React.FC<FormGroupProps> = ({ children, helpText, inline, ...props }: any) => {
   const helpComponent = helpText && <HelpText>{helpText}</HelpText>;

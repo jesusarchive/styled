@@ -4,7 +4,12 @@ import Box from './Box';
 import { getTheme, isDefined, px } from './utils/helpers';
 import { BaseProps, baseStyles } from './utils/system';
 
-const styles = (props: any) => {
+interface LegendProps extends BaseProps {
+  children?: React.ReactNode;
+  as?: string;
+}
+
+const styles = (props: LegendProps) => {
   const { color: cl, fontFamily, fontWeight: fw, lineHeight, mb } = props;
   const { color, fontWeight, marginBottom } = getTheme(props, 'legend');
   return css`
@@ -17,11 +22,6 @@ const styles = (props: any) => {
     white-space: nowrap;
   `;
 };
-
-interface LegendProps extends BaseProps {
-  children?: React.ReactNode;
-  as?: string;
-}
 
 const Legend: React.FC<LegendProps> = styled(Box)`
   ${styles};

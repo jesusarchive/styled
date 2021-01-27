@@ -4,7 +4,43 @@ import Box from './Box';
 import { getTheme, isDefined, px } from './utils/helpers';
 import { BaseProps, formPseudo, inputTextTypes, OutlinesProps } from './utils/system';
 
-const styles = (props: any) => {
+interface InputProps extends BaseProps, OutlinesProps {
+  accept?: string;
+  as?: string;
+  autoComplete?: string;
+  bordered?: boolean;
+  checked?: boolean;
+  defaultChecked?: boolean;
+  defaultValue?: number | string;
+  disabled?: boolean;
+  id?: string;
+  maxLength?: number;
+  minLength?: number;
+  name?: string;
+  pattern?: string;
+  placeholder?: string;
+  readOnly?: boolean;
+  required?: boolean;
+  size?: 'sm' | 'md' | 'lg';
+  tabindex?: number;
+  type?:
+    | 'checkbox'
+    | 'color'
+    | 'date'
+    | 'email'
+    | 'file'
+    | 'hidden'
+    | 'number'
+    | 'password'
+    | 'radio'
+    | 'search'
+    | 'tel'
+    | 'text';
+  valid?: boolean;
+  value?: string | number;
+}
+
+const styles = (props: InputProps) => {
   const {
     bg,
     bordered,
@@ -46,61 +82,23 @@ const styles = (props: any) => {
     border: ${bordered ? `${px(bw || borderWidth)} solid ${currentBorderColor}` : 0};
     border-radius: ${px(isDefined(br) ? br : borderRadius)};
     color: ${cl || color};
-    display: ${!['checkbox', 'radio'].includes(type) ? 'block' : 'inline-block'};
+    display: ${!['checkbox', 'radio'].includes(type as any) ? 'block' : 'inline-block'};
     font-family: ${fontFamily || 'inherit'};
-    font-size: ${px(fz || fontSize[size])};
-    ${inputTextTypes.includes(type) ? `height: ${h || px(height[size])}` : ''};
+    font-size: ${px(fz || fontSize[size as any])};
+    ${inputTextTypes.includes(type as any) ? `height: ${h || px(height[size as any])}` : ''};
     line-height: ${lh || lineHeight};
-    ${['checkbox', 'radio'].includes(type) ? `margin: 0 ${px(inlineMargin)} 0 0` : ''};
-    padding: ${inputTextTypes.includes(type) ? px(isDefined(pd) ? pd : padding[size]) : 0};
-    ${!['checkbox', 'radio', 'color'].includes(type) ? `width: ${width || '100%'}` : ''};
+    ${['checkbox', 'radio'].includes(type as any) ? `margin: 0 ${px(inlineMargin)} 0 0` : ''};
+    padding: ${inputTextTypes.includes(type as any) ? px(isDefined(pd) ? pd : padding[size as any]) : 0};
+    ${!['checkbox', 'radio', 'color'].includes(type as any) ? `width: ${width || '100%'}` : ''};
 
     &[type='file'] {
-      font-size: ${px(fontSize[size] - 1)};
-      padding: ${px(padding[size] - 1)};
+      font-size: ${px(fontSize[size as any] - 1)};
+      padding: ${px(padding[size as any] - 1)};
     }
   `;
 };
 
-interface InputProps extends BaseProps, OutlinesProps {
-  accept?: string;
-  as?: string;
-  autoComplete?: string;
-  bordered?: boolean;
-  checked?: boolean;
-  defaultChecked?: boolean;
-  defaultValue?: number | string;
-  disabled?: boolean;
-  id?: string;
-  maxLength?: number;
-  minLength?: number;
-  name?: string;
-  pattern?: string;
-  placeholder?: string;
-  readOnly?: boolean;
-  required?: boolean;
-  size?: 'sm' | 'md' | 'lg';
-  tabindex?: number;
-  type?:
-    | 'checkbox'
-    | 'color'
-    | 'date'
-    | 'email'
-    | 'file'
-    | 'hidden'
-    | 'number'
-    | 'password'
-    | 'radio'
-    | 'search'
-    | 'tel'
-    | 'text';
-  valid?: boolean;
-  value?: string | number;
-}
-
-const Input: React.FC<any> = styled(Box).attrs(({ id, name }: any) => ({
-  id: id || name
-}))`
+const Input: React.FC<InputProps> = styled(Box)`
   ${styles};
   ${formPseudo};
 `;

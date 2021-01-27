@@ -1,11 +1,11 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import Box from './Box';
-import { getTheme, isDefined, px } from './utils/helpers';
+import { getTheme, px } from './utils/helpers';
 import { BaseProps, baseStyles, SizesTypes, VariantTypes } from './utils/system';
 
 interface AlertProps extends BaseProps {
-  children?: any;
+  children?: React.ReactNode;
   as?: string;
   bordered?: boolean;
   dark?: boolean;
@@ -14,12 +14,11 @@ interface AlertProps extends BaseProps {
 }
 
 const styles = (props: AlertProps) => {
-  const { borderRadius: br, lineHeight, size, width } = props;
-  const { borderRadius, maxWidth, padding } = getTheme(props, 'alert');
-
+  const { borderRadius: br, maxWidth, padding } = getTheme(props, 'alert');
+  const { borderRadius = br, lineHeight, size, width } = props;
   return css`
     ${baseStyles.variant};
-    border-radius: ${px(isDefined(br) ? br : borderRadius)};
+    border-radius: ${px(borderRadius)};
     font-size: ${baseStyles.fontSize};
     line-height: ${px(lineHeight as any) || baseStyles.lineHeight};
     max-width: ${px(maxWidth)};
