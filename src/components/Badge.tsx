@@ -13,7 +13,7 @@ interface BadgeProps extends BaseProps {
   variant?: VariantTypes;
 }
 
-const Badge: React.FC<BadgeProps> = styled(Box)((props) => {
+const styles = (props: BadgeProps) => {
   const { borderRadius: radii, fontSize: fz, fontWeight: fw, lineHeight, size } = props as any;
   const { borderRadius, fontSize, fontWeight, padding } = getTheme(props, 'badge');
   return css`
@@ -27,7 +27,11 @@ const Badge: React.FC<BadgeProps> = styled(Box)((props) => {
     padding: ${px(padding[0])} ${px(padding[1])};
     vertical-align: baseline;
   `;
-});
+};
+
+const Badge: React.FC<BadgeProps> = styled(Box)`
+  ${styles};
+`;
 
 Badge.defaultProps = {
   as: 'span',

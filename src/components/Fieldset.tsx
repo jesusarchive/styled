@@ -2,19 +2,20 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import Box from './Box';
 import { getTheme, isDefined, px, spacer } from './utils/helpers';
+import { BaseProps } from './utils/system';
 
-interface FieldsetProps {
+interface FieldsetProps extends BaseProps {
   children?: React.ReactNode;
   as?: string;
   inline?: boolean;
 }
 
-const styles = (props: any) => {
-  const { borderRadius: br, inline, mb, ml, padding: pd } = props;
-  const { borderColor, borderRadius, padding, marginBottom } = getTheme(props, 'fieldset');
+const styles = (props: FieldsetProps) => {
+  const { borderColor, borderRadius: br, padding, marginBottom } = getTheme(props, 'fieldset');
+  const { borderRadius = br, inline, mb, ml, padding: pd } = props;
   return css`
     border: 1px solid ${borderColor};
-    border-radius: ${px(isDefined(br) ? px(br) : borderRadius)};
+    border-radius: ${px(isDefined(br) ? br : borderRadius)};
     margin-bottom: ${px(isDefined(mb) ? mb : marginBottom)};
     padding: ${px(isDefined(pd) ? pd : padding)};
     text-align: left;
@@ -23,7 +24,7 @@ const styles = (props: any) => {
       ${inline ? 'display: inline-block;' : ''};
 
       + * {
-        ${inline ? `margin-left: ${isDefined(ml) ? px(ml) : spacer(2)} ;` : ''};
+        ${inline ? `margin-left: ${px(isDefined(ml) ? ml : spacer(2))} ;` : ''};
       }
     }
   `;

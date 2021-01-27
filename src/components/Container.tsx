@@ -4,8 +4,17 @@ import Box from './Box';
 import { getTheme, isDefined, px, responsive, spacer } from './utils/helpers';
 import { BaseProps } from './utils/system';
 
-const styles = (props: any) => {
-  const { ml, mr, pb, pl, pr, pt } = props;
+const layoutTypes = ['flex', 'fullScreen'];
+
+type LayoutTypes = typeof layoutTypes[number];
+interface ContainerProps extends BaseProps {
+  children?: React.ReactNode;
+  layout?: LayoutTypes;
+  verticalPadding?: boolean;
+}
+
+const styles = (props: ContainerProps) => {
+  const { ml, mr, pb, pl, pr, pt } = props as any;
   const container = getTheme(props, 'container');
   const vertical = ({ verticalPadding }: any) => {
     /* istanbul ignore else */
@@ -41,21 +50,12 @@ const styles = (props: any) => {
     max-width: ${container.maxWidth ? px(container.maxWidth) : 'none'};
     position: relative;
     width: 100%;
-    ${container.layout[props.layout] || ''}
+    ${container.layout[props.layout as any] || ''}
     ${vertical};
 
     ${grid};
   `;
 };
-
-const layoutTypes = ['flex', 'fullScreen'];
-
-type LayoutTypes = typeof layoutTypes[number];
-interface ContainerProps extends BaseProps {
-  children?: React.ReactNode;
-  layout?: LayoutTypes;
-  verticalPadding?: boolean;
-}
 
 const Container: React.FC<ContainerProps> = styled(Box)`
   ${styles};

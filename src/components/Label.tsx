@@ -10,7 +10,7 @@ interface LabelProps extends BaseProps {
   inline?: boolean;
 }
 
-const Label: React.FC<LabelProps> = styled(Box)((props: any) => {
+const styles = (props: LabelProps) => {
   const { color: cl, fontFamily, fontSize, fontWeight: fw, inline, lineHeight, mb } = props;
   const { color, fontWeight, inlineFontSize, marginBottom } = getTheme(props, 'label');
   return css`
@@ -20,11 +20,15 @@ const Label: React.FC<LabelProps> = styled(Box)((props: any) => {
     font-family: ${fontFamily || 'inherit'};
     font-weight: ${fw || fontWeight};
     ${inline ? `font-size: ${px(fontSize || inlineFontSize)}` : ''};
-    line-height: ${lineHeight || baseStyles.lineHeight};
+    line-height: ${(lineHeight as any) || baseStyles.lineHeight};
     ${!inline ? `margin-bottom: ${px(isDefined(mb) ? mb : marginBottom)}` : ''};
     white-space: nowrap;
   `;
-});
+};
+
+const Label: React.FC<LabelProps> = styled(Box)`
+  ${styles};
+`;
 
 Label.defaultProps = {
   as: 'label'

@@ -9,8 +9,8 @@ interface CodeProps extends BaseProps {
   as?: string;
 }
 
-const Code: React.FC<CodeProps> = styled(Box)((props) => {
-  const { bg, border: bd, borderRadius: br, fontFamily: ff, padding: pd } = props as any;
+const styles = (props: CodeProps) => {
+  const { bg, border: bd, borderRadius: br, fontFamily: ff, padding: pd } = props;
   const { backgroundColor, border, borderRadius, fontFamily, padding } = getTheme(props, 'code');
   return css`
     background-color: ${bg || backgroundColor};
@@ -19,7 +19,11 @@ const Code: React.FC<CodeProps> = styled(Box)((props) => {
     font-family: ${ff || fontFamily || ff};
     padding: ${px(isDefined(pd) ? pd : padding)};
   `;
-});
+};
+
+const Code: React.FC<CodeProps> = styled(Box)`
+  ${styles};
+`;
 
 Code.defaultProps = {
   as: 'code'

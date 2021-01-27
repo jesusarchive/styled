@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import Box from './Box';
-import { getTheme, isDefined, px } from './utils/helpers';
+import { getTheme, px } from './utils/helpers';
 import { BaseProps, baseStyles, SizesTypes, VariantTypes } from './utils/system';
 
 interface AlertProps extends BaseProps {
@@ -13,25 +13,27 @@ interface AlertProps extends BaseProps {
   variant?: VariantTypes;
 }
 
-const Alert: React.FC<AlertProps> = styled(Box).attrs({
-  role: 'alert'
-})((props) => {
-  const { borderRadius: br, lineHeight, size, width } = props as any;
-  const { borderRadius, maxWidth, padding } = getTheme(props, 'alert');
+const styles = (props: AlertProps) => {
+  const { borderRadius: br, maxWidth, padding } = getTheme(props, 'alert');
+  const { borderRadius = br, lineHeight, size, width } = props;
   return css`
     ${baseStyles.variant};
-    border-radius: ${px(isDefined(br) ? br : borderRadius)};
+    border-radius: ${px(borderRadius)};
     font-size: ${baseStyles.fontSize};
-    line-height: ${lineHeight || baseStyles.lineHeight};
+    line-height: ${px(lineHeight as any) || baseStyles.lineHeight};
     max-width: ${px(maxWidth)};
-    padding: ${px(padding[size][0])} ${px(padding[size][1])};
-    width: ${width || '100%'};
+    padding: ${px(padding[size as any][0])} ${px(padding[size as any][1])};
+    width: ${px(width as any) || '100%'};
 
     a {
       ${baseStyles.color};
     }
   `;
-});
+};
+
+const Alert: React.FC<AlertProps> = styled(Box)`
+  ${styles};
+`;
 
 Alert.defaultProps = {
   bordered: false,

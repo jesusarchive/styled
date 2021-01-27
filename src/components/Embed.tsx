@@ -3,6 +3,11 @@ import styled from 'styled-components';
 import Box from './Box';
 import { BaseProps } from './utils/system';
 
+interface EmbedProps extends BaseProps {
+  children?: React.ReactNode;
+  ratio?: number;
+}
+
 const StyledEmbed = styled(Box)`
   overflow: hidden;
   position: relative;
@@ -18,11 +23,6 @@ const StyledEmbed = styled(Box)`
     width: 100%;
   }
 `;
-
-interface EmbedProps extends BaseProps {
-  children?: React.ReactNode;
-  ratio?: number;
-}
 
 const Embed: React.FC<EmbedProps> = ({ children, ...props }: any) => (
   <StyledEmbed dangerouslySetInnerHTML={{ __html: children }} {...props} />

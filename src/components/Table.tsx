@@ -4,17 +4,16 @@ import Box from './Box';
 import { getTheme, px } from './utils/helpers';
 import { BaseProps, SizesTypes } from './utils/system';
 
-const styles = (props: any) => {
-  const { bordered, borderless, inverted } = props;
-  const { borderColors, colors } = getTheme(props, 'table');
-  return css`
-    background-color: ${colors[inverted ? 'secondary' : 'primary']};
-    ${bordered && !borderless ? `border: 1px solid ${borderColors[inverted ? 'secondary' : 'primary']};` : ''};
-    border-collapse: collapse;
-    color: ${colors[inverted ? 'primary' : 'secondary']};
-    width: 100%;
-  `;
-};
+interface TableProps extends BaseProps {
+  children: React.ReactNode;
+  as: string;
+  bordered: boolean;
+  borderless: boolean;
+  head: 'light' | 'dark';
+  inverted: boolean;
+  size: SizesTypes;
+  striped: boolean;
+}
 
 const stylesCaption = (props: any) => {
   const { captionColor, captionPadding } = getTheme(props, 'table');
@@ -91,48 +90,49 @@ const stylesStriped = (props: any) => {
   return '';
 };
 
-interface TableProps extends BaseProps {
-  children: React.ReactNode;
-  as: string;
-  bordered: boolean;
-  borderless: boolean;
-  head: 'light' | 'dark';
-  inverted: boolean;
-  size: SizesTypes;
-  striped: boolean;
-}
+const styles = (props: TableProps) => {
+  const { bordered, borderless, inverted } = props;
+  const { borderColors, colors } = getTheme(props, 'table');
+  return css`
+    background-color: ${colors[inverted ? 'secondary' : 'primary']};
+    ${bordered && !borderless ? `border: 1px solid ${borderColors[inverted ? 'secondary' : 'primary']};` : ''};
+    border-collapse: collapse;
+    color: ${colors[inverted ? 'primary' : 'secondary']};
+    width: 100%;
 
-const Table: React.FC<any> = styled(Box)`
+    th {
+      text-align: inherit;
+    }
+
+    th,
+    td {
+      ${stylesCellBorder};
+      ${stylesPadding};
+      vertical-align: top;
+    }
+
+    thead {
+      ${stylesHeadBackgroundColor};
+      ${stylesHeadColor};
+    }
+
+    thead th {
+      ${stylesHeadCellBorder};
+      vertical-align: bottom;
+    }
+
+    tbody tr:nth-of-type(odd) {
+      ${stylesStriped};
+    }
+
+    caption {
+      ${stylesCaption};
+    }
+  `;
+};
+
+const Table: React.FC<TableProps> = styled(Box)`
   ${styles};
-
-  th {
-    text-align: inherit;
-  }
-
-  th,
-  td {
-    ${stylesCellBorder};
-    ${stylesPadding};
-    vertical-align: top;
-  }
-
-  thead {
-    ${stylesHeadBackgroundColor};
-    ${stylesHeadColor};
-  }
-
-  thead th {
-    ${stylesHeadCellBorder};
-    vertical-align: bottom;
-  }
-
-  tbody tr:nth-of-type(odd) {
-    ${stylesStriped};
-  }
-
-  caption {
-    ${stylesCaption};
-  }
 `;
 
 Table.defaultProps = {

@@ -8,7 +8,7 @@ interface TextProps extends BaseProps {
   as?: string;
 }
 
-const Text: React.FC<TextProps> = styled(Box)({});
+const Text: React.FC<TextProps> = styled(Box)``;
 
 Text.defaultProps = {
   as: 'span'

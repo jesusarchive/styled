@@ -10,17 +10,21 @@ interface LinkProps extends BaseProps {
   variant?: VariantTypes;
 }
 
-const Link: React.FC<LinkProps> = styled(Box)((props) => {
+const styles = (props: LinkProps) => {
   const { color } = props;
   const currentColor = color || getColor(props);
   return css`
-    color: ${currentColor};
+    color: ${currentColor as any};
 
     &:visited {
-      color: ${getDimmerColor(currentColor)};
+      color: ${getDimmerColor(currentColor as any)};
     }
   `;
-});
+};
+
+const Link: React.FC<LinkProps> = styled(Box)`
+  ${styles};
+`;
 
 Link.defaultProps = {
   as: 'a'
