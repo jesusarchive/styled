@@ -1,13 +1,11 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import Box from './Box';
-import { getTheme, isDefined, px } from './utils/helpers';
-import { BaseProps, baseStyles } from './utils/system';
+import { getTheme, isDefined, px } from '../utils/helpers';
+import { baseStyles } from '../utils/system';
+import { BaseProps } from '../utils/types';
 
-interface LegendProps extends BaseProps {
-  children?: React.ReactNode;
-  as?: string;
-}
+type LegendProps = BaseProps;
 
 const styles = (props: LegendProps) => {
   const { color: cl, fontFamily, fontWeight: fw, lineHeight, mb } = props;
@@ -17,7 +15,7 @@ const styles = (props: LegendProps) => {
     display: block;
     font-family: ${fontFamily || 'inherit'};
     font-weight: ${fw || fontWeight};
-    line-height: ${lineHeight || baseStyles.lineHeight};
+    line-height: ${(lineHeight as any) || baseStyles.lineHeight};
     margin-bottom: ${px(isDefined(mb) ? mb : marginBottom)};
     white-space: nowrap;
   `;

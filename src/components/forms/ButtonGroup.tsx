@@ -1,13 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import Box from './Box';
-import { BaseProps, SizesAllTypes, VariantTypes } from './utils/system';
+import Box from '../ui/Box';
+import { BaseProps, WithVariant } from '../utils/types';
 
-interface ButtonGroupProps extends BaseProps {
-  children?: React.ReactNode;
-  size?: SizesAllTypes;
-  variant?: VariantTypes;
-}
+interface ButtonGroupProps extends BaseProps, WithVariant {}
 
 export const StyledButtonGroup = styled(Box)`
   display: inline-flex;

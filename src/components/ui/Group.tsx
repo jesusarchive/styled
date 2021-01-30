@@ -1,12 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import Box from './Box';
-import { spacer } from './utils/helpers';
-import { BaseProps } from './utils/system';
+import { spacer } from '../utils/helpers';
+import { BaseProps } from '../utils/types';
 
-interface GroupProps extends BaseProps {
-  children: React.ReactNode;
-}
+type GroupProps = BaseProps;
 
 const Group: React.FC<GroupProps> = styled(Box)`
   align-items: center;

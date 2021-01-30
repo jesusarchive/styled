@@ -1,12 +1,10 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import Box from './Box';
-import { getTheme, isDefined, px, spacer } from './utils/helpers';
-import { BaseProps } from './utils/system';
+import { getTheme, isDefined, px, spacer } from '../utils/helpers';
+import { BaseProps } from '../utils/types';
 
 interface FieldsetProps extends BaseProps {
-  children?: React.ReactNode;
-  as?: string;
   inline?: boolean;
 }
 

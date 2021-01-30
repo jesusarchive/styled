@@ -1,13 +1,11 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import Box from './Box';
-import { getTheme, px } from './utils/helpers';
-import { BaseProps } from './utils/system';
+import Box from '../ui/Box';
+import { getTheme, px } from '../utils/helpers';
+import { BaseProps } from '../utils/types';
 
 interface FormProps extends BaseProps {
-  children?: React.ReactNode;
   action?: string;
-  as?: string;
   bordered?: boolean;
   enctype?: string;
   method?: 'get' | 'post';

@@ -1,15 +1,13 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import Box from './Box';
-import Flex from './Flex';
-import { getTheme, isDefined, px } from './utils/helpers';
-import { BaseProps } from './utils/system';
+import Box from '../ui/Box';
+import Flex from '../ui/Flex';
+import { getTheme, isDefined, px } from '../utils/helpers';
+import { BaseProps, WithInline } from '../utils/types';
 
-interface FormGroupProps extends BaseProps {
-  children?: React.ReactNode;
+interface FormGroupProps extends BaseProps, WithInline {
   bordered?: boolean;
   helpText?: string;
-  inline?: boolean;
 }
 
 const helpBlock = (props: any) => {

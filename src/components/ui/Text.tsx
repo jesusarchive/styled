@@ -1,12 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import Box from './Box';
-import { BaseProps } from './utils/system';
+import { BaseProps } from '../utils/types';
 
-interface TextProps extends BaseProps {
-  children?: React.ReactNode;
-  as?: string;
-}
+type TextProps = BaseProps;
 
 const Text: React.FC<TextProps> = styled(Box)``;
 

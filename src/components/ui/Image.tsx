@@ -1,11 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import Box from './Box';
-import { BaseProps } from './utils/system';
+import { BaseProps } from '../utils/types';
 
 interface ImageProps extends BaseProps {
   alt: string;
-  as?: string;
   src: string;
 }
 

@@ -1,12 +1,12 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import Box from './Box';
-import { getTheme, isDefined, px } from './utils/helpers';
-import { BaseProps, formPseudo, inputTextTypes, OutlinesProps } from './utils/system';
+import Box from '../ui/Box';
+import { getTheme, isDefined, px } from '../utils/helpers';
+import { formPseudo, inputTextTypes } from '../utils/system';
+import { BaseProps, InputTypes, OutlinesProps } from '../utils/types';
 
 interface InputProps extends BaseProps, OutlinesProps {
   accept?: string;
-  as?: string;
   autoComplete?: string;
   bordered?: boolean;
   checked?: boolean;
@@ -21,21 +21,8 @@ interface InputProps extends BaseProps, OutlinesProps {
   placeholder?: string;
   readOnly?: boolean;
   required?: boolean;
-  size?: 'sm' | 'md' | 'lg';
   tabindex?: number;
-  type?:
-    | 'checkbox'
-    | 'color'
-    | 'date'
-    | 'email'
-    | 'file'
-    | 'hidden'
-    | 'number'
-    | 'password'
-    | 'radio'
-    | 'search'
-    | 'tel'
-    | 'text';
+  type?: InputTypes;
   valid?: boolean;
   value?: string | number;
 }

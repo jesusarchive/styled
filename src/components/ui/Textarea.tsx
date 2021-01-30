@@ -1,11 +1,11 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import Box from './Box';
-import { getTheme, isDefined, px } from './utils/helpers';
-import { BaseProps, formPseudo, OutlinesProps, SizesTypes } from './utils/system';
+import { getTheme, isDefined, px } from '../utils/helpers';
+import { formPseudo } from '../utils/system';
+import { BaseProps, OutlinesProps } from '../utils/types';
 
 interface TextareaProps extends BaseProps, OutlinesProps {
-  as?: string;
   bordered?: boolean;
   defaultValue?: number | string;
   disabled?: boolean;
@@ -17,7 +17,6 @@ interface TextareaProps extends BaseProps, OutlinesProps {
   readOnly?: boolean;
   required?: boolean;
   rows?: number;
-  size?: SizesTypes;
   tabindex?: number;
   valid?: boolean;
   value?: string;

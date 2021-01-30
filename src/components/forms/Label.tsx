@@ -1,14 +1,11 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import Box from './Box';
-import { getTheme, isDefined, px } from './utils/helpers';
-import { BaseProps, baseStyles } from './utils/system';
+import Box from '../ui/Box';
+import { getTheme, isDefined, px } from '../utils/helpers';
+import { baseStyles } from '../utils/system';
+import { BaseProps, WithInline } from '../utils/types';
 
-interface LabelProps extends BaseProps {
-  children?: React.ReactNode;
-  as?: string;
-  inline?: boolean;
-}
+interface LabelProps extends BaseProps, WithInline {}
 
 const styles = (props: LabelProps) => {
   const { color: cl, fontFamily, fontSize, fontWeight: fw, inline, lineHeight, mb } = props;

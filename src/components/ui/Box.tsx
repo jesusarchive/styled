@@ -1,15 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import { background, border, color, flexbox, grid, layout, position, space, typography } from 'styled-system';
-import { BaseProps } from './utils/system';
+import { BaseProps } from '../utils/types';
 
-export interface BoxProps extends BaseProps {
-  children?: React.ReactNode;
-  as?: string;
-}
+export type BoxProps = BaseProps;
 
 const Box: React.FC<BoxProps> = styled.div`
-  box-sizing: 'border-box';
+  box-sizing: border-box;
   ${space}
   ${layout} 
   ${color} 

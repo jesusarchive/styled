@@ -2,18 +2,26 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import Box from './Box';
-import { getColor, getTheme, px } from './utils/helpers';
+import { getColor, getTheme, px } from '../utils/helpers';
+import { BaseProps, WithVariant } from '../utils/types';
 
-const styles = (props: any) => {
+interface SwitchProps extends BaseProps, WithVariant {
+  name: string;
+  value?: boolean;
+  rest?: any;
+  status?: any;
+}
+
+const styles = (props: SwitchProps) => {
   const { size } = props;
   const sizes = getTheme(props, 'switchSizes');
   return css`
     cursor: pointer;
-    height: ${px(sizes[size].height)};
+    height: ${px(sizes[size as any].height)};
     position: relative;
     user-select: none;
     vertical-align: middle;
-    width: ${px(sizes[size].width)};
+    width: ${px(sizes[size as any].width)};
   `;
 };
 
@@ -68,20 +76,7 @@ export const StyledSwitch: React.FC<any> = styled(Box)`
   ${styles};
 `;
 
-interface ISwitchProps extends React.HTMLAttributes<Element> {
-  name: string;
-  onChange?: (...args: any[]) => any;
-  size?: any;
-  value?: boolean;
-  variant?: any;
-  rest?: any;
-}
-
-type SwitchState = {
-  status?: any;
-};
-
-class Switch extends React.PureComponent<ISwitchProps, SwitchState> {
+class Switch extends React.PureComponent<SwitchProps, any> {
   constructor(props: any) {
     super(props);
     this.state = {
@@ -115,7 +110,7 @@ class Switch extends React.PureComponent<ISwitchProps, SwitchState> {
     const { name, ...rest } = this.props;
     const { status } = this.state;
     return (
-      <StyledSwitch status={status} {...rest} onClick={this.handleClick}>
+      <StyledSwitch status={status as any} {...rest} onClick={this.handleClick}>
         <StyledInput type="hidden" name={name} value={status} />
         <StyledTrack status={status} {...rest} />
         <StyledButton status={status} {...rest} />

@@ -1,12 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import Box from './Box';
-import { BaseProps } from './utils/system';
+import { BaseProps } from '../utils/types';
 
-interface ScreenProps extends BaseProps {
-  children?: React.ReactNode;
-  as?: string;
-}
+type ScreenProps = BaseProps;
 
 const Screen: React.FC<ScreenProps> = styled(Box)``;
 

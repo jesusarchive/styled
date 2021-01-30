@@ -1,25 +1,16 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import Box from './Box';
-import { getColor, getStyles, getTheme, isDefined, px } from './utils/helpers';
-import { BaseProps, baseStyles, outlines, OutlinesProps, SizesAllTypes, VariantTypes } from './utils/system';
+import Box from '../ui/Box';
+import { getColor, getStyles, getTheme, isDefined, px } from '../utils/helpers';
+import { baseStyles, outlines } from '../utils/system';
+import { BaseProps, ButtonTypes, OutlinesProps, WithDark, WithVariant } from '../utils/types';
 
-const buttonTypes = ['button', 'submit', 'reset'];
-
-type ButtonTypes = typeof buttonTypes[number];
-
-interface ButtonProps extends BaseProps, OutlinesProps {
-  children?: React.ReactNode;
+interface ButtonProps extends BaseProps, OutlinesProps, WithDark, WithVariant {
   animate?: boolean;
-  as?: string;
   block?: boolean;
   bordered?: boolean;
-  dark?: boolean;
   disabled?: boolean;
-  onClick?: (...args: any[]) => any;
-  size?: SizesAllTypes;
   type?: ButtonTypes;
-  variant?: VariantTypes;
 }
 
 const styles = (props: ButtonProps) => {

@@ -1,17 +1,15 @@
 import styled, { css } from 'styled-components';
-import Box from './Box';
-import { getDimmerColor, getTheme, isDefined, lighten, px } from './utils/helpers';
-import { BaseProps, formPseudo, OutlinesProps, SizesTypes } from './utils/system';
+import Box from '../ui/Box';
+import { getDimmerColor, getTheme, isDefined, lighten, px } from '../utils/helpers';
+import { formPseudo } from '../utils/system';
+import { BaseProps, OutlinesProps, Sizes } from '../utils/types';
 
 interface SelectProps extends BaseProps, OutlinesProps {
-  children?: React.ReactNode;
-  as?: string;
   bordered?: boolean;
   disabled?: boolean;
   multiple?: boolean;
   required?: boolean;
-  size?: number;
-  sizing?: SizesTypes;
+  sizing?: Sizes;
   valid?: boolean;
 }
 

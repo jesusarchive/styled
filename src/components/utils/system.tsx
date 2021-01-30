@@ -1,24 +1,14 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import darken from 'polished/lib/color/darken';
 import desaturate from 'polished/lib/color/desaturate';
 import lighten from 'polished/lib/color/lighten';
 import { css } from 'styled-components';
-import {
-  BackgroundProps,
-  BorderProps,
-  ColorProps,
-  compose,
-  FlexboxProps,
-  GridProps,
-  LayoutProps,
-  PositionProps,
-  SpaceProps,
-  style,
-  TypographyProps
-} from 'styled-system';
+import { compose, style } from 'styled-system';
 import { getColor, getTheme, getYiq, isDefined, px } from './helpers';
 import { placeholder } from './mixins';
-import { colors as colorsTheme, palette } from './theme';
+
+export const inputTextTypes = ['date', 'email', 'file', 'number', 'password', 'search', 'tel', 'text'];
+export const sizesTypes = ['sm', 'md', 'lg'];
+export const sizesAllTypes = ['xs', 'sm', 'md', 'lg', 'xl'];
 
 export const textTransform = style({
   prop: 'textTransform',
@@ -48,34 +38,6 @@ export const outlines = compose(
     key: 'outlines'
   })
 );
-
-export interface OutlinesProps {
-  outline?: string;
-  outlineColor?: string;
-  outlineOffset?: number | string;
-  outlineStyle?: string;
-  outlineWidth?: number | string;
-}
-
-export const inputTextTypes = ['date', 'email', 'file', 'number', 'password', 'search', 'tel', 'text'];
-
-export const sizesTypes = ['sm', 'md', 'lg'];
-export const sizesAllTypes = ['xs', 'sm', 'md', 'lg', 'xl'];
-export const variantTypes = [...Object.keys(palette), ...Object.keys(colorsTheme)];
-
-export type SizesTypes = typeof sizesTypes[number];
-export type SizesAllTypes = typeof sizesAllTypes[number];
-export type VariantTypes = typeof variantTypes[number];
-export interface BaseProps
-  extends SpaceProps,
-    LayoutProps,
-    ColorProps,
-    BorderProps,
-    FlexboxProps,
-    GridProps,
-    TypographyProps,
-    BackgroundProps,
-    PositionProps {}
 
 export const baseStyles = {
   color: (props: any): any => {

@@ -1,13 +1,10 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import Box from './Box';
-import { getTheme, isDefined, px } from './utils/helpers';
-import { BaseProps } from './utils/system';
+import { getTheme, isDefined, px } from '../utils/helpers';
+import { BaseProps } from '../utils/types';
 
-interface CodeProps extends BaseProps {
-  children?: React.ReactNode;
-  as?: string;
-}
+type CodeProps = BaseProps;
 
 const styles = (props: CodeProps) => {
   const { bg, border: bd, borderRadius: br, fontFamily: ff, padding: pd } = props;

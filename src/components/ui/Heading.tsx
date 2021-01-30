@@ -1,11 +1,11 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import Box from './Box';
-import { getTheme, isDefined, px, spacer } from './utils/helpers';
-import { BaseProps, baseStyles } from './utils/system';
+import { getTheme, isDefined, px, spacer } from '../utils/helpers';
+import { baseStyles } from '../utils/system';
+import { BaseProps } from '../utils/types';
 
 interface HeadingProps extends BaseProps {
-  children?: React.ReactNode;
   as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
   gutterBottom?: boolean;
   level?: 1 | 2 | 3 | 4 | 5 | 6;

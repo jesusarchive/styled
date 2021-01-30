@@ -1,17 +1,14 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import Box from './Box';
-import { getTheme, px } from './utils/helpers';
-import { BaseProps, SizesTypes } from './utils/system';
+import { getTheme, px } from '../utils/helpers';
+import { BaseProps } from '../utils/types';
 
 interface TableProps extends BaseProps {
-  children: React.ReactNode;
-  as: string;
   bordered: boolean;
   borderless: boolean;
   head: 'light' | 'dark';
   inverted: boolean;
-  size: SizesTypes;
   striped: boolean;
 }
 

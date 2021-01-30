@@ -1,15 +1,11 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import Box from './Box';
-import { getTheme, isDefined, px, responsive, spacer } from './utils/helpers';
-import { BaseProps } from './utils/system';
+import { getTheme, isDefined, px, responsive, spacer } from '../utils/helpers';
+import { BaseProps } from '../utils/types';
 
-const layoutTypes = ['flex', 'fullScreen'];
-
-type LayoutTypes = typeof layoutTypes[number];
 interface ContainerProps extends BaseProps {
-  children?: React.ReactNode;
-  layout?: LayoutTypes;
+  layout?: 'flex' | 'fullScreen';
   verticalPadding?: boolean;
 }
 

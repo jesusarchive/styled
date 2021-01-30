@@ -1,13 +1,11 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import Box from './Box';
-import { getColor, getDimmerColor } from './utils/helpers';
-import { BaseProps, VariantTypes } from './utils/system';
+import { getColor, getDimmerColor } from '../utils/helpers';
+import { BaseProps, WithVariant } from '../utils/types';
 
-interface LinkProps extends BaseProps {
-  as?: string;
+interface LinkProps extends BaseProps, WithVariant {
   href: string;
-  variant?: VariantTypes;
 }
 
 const styles = (props: LinkProps) => {

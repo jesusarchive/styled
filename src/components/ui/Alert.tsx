@@ -1,16 +1,12 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import Box from './Box';
-import { getTheme, px } from './utils/helpers';
-import { BaseProps, baseStyles, SizesTypes, VariantTypes } from './utils/system';
+import { getTheme, px } from '../utils/helpers';
+import { baseStyles } from '../utils/system';
+import { BaseProps, WithDark, WithVariant } from '../utils/types';
 
-interface AlertProps extends BaseProps {
-  children?: React.ReactNode;
-  as?: string;
+interface AlertProps extends BaseProps, WithDark, WithVariant {
   bordered?: boolean;
-  dark?: boolean;
-  size?: SizesTypes;
-  variant?: VariantTypes;
 }
 
 const styles = (props: AlertProps) => {

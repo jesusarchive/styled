@@ -1,16 +1,13 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import Box from './Box';
-import { getTheme, px } from './utils/helpers';
-import { BaseProps, SizesTypes } from './utils/system';
+import { getTheme, px } from '../utils/helpers';
+import { BaseProps, WithInline } from '../utils/types';
 
-interface ListProps extends BaseProps {
-  children?: React.ReactNode;
+interface ListProps extends BaseProps, WithInline {
   as?: 'ul' | 'ol';
   bordered?: boolean;
-  inline?: boolean;
   reversed?: boolean;
-  size?: SizesTypes;
   start?: number;
   styleType?: ('disc' | 'circle' | 'square' | 'decimal' | 'lower-alpha' | 'none') | string;
   type?: '1' | 'a' | 'A' | 'i' | 'I';

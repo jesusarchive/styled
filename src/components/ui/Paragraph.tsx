@@ -1,13 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import Box from './Box';
-import { spacer } from './utils/helpers';
-import { BaseProps } from './utils/system';
+import { spacer } from '../utils/helpers';
+import { BaseProps } from '../utils/types';
 
-interface ParagraphProps extends BaseProps {
-  children?: React.ReactNode;
-  as?: string;
-}
+type ParagraphProps = BaseProps;
 
 const Paragraph: React.FC<ParagraphProps> = styled(Box)`
   & + & {
